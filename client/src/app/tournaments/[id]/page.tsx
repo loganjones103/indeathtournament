@@ -69,17 +69,28 @@ export default function TournamentDetails() {
             <h1 className="text-3xl font-bold">{tournament?.name}</h1>
             <p className="text-lg">{tournament?.description}</p>
 
-            <h2 className="text-xl font-bold mt-6">Leaderboard</h2>
+            <div className="relative w-full max-w-2xl mt-6">
+                <Link href="/tournaments">
+                    <p className="absolute left-0 top-1/2 -translate-y-1/2 text-blue-600 cursor-pointer hover:underline">Back</p>
+                </Link>
+                <h2 className="text-xl font-bold text-center">Leaderboard</h2>
+                {user && (user._id === tournament.createdBy._id || user.role === "admin") && (
+                    <span onClick={handleDelete} className="absolute right-0 top-1/2 -translate-y-1/2 text-red-600 cursor-pointer hover:underline">
+                        Delete
+                    </span>
+                )}
+            </div>
+
             <table className="w-full max-w-2xl mt-4 border">
                 <thead>
-                    <tr className="bg-gray-200">
+                    <tr className="bg-gray-200 lb-header">
                         <th className="p-2">Rank</th>
                         <th className="p-2">Player</th>
                         <th className="p-2">Score</th>
                         <th className="p-2">Proof</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody className="lb-body">
                     {(tournament?.participants ?? [])
                         .sort((a, b) => b.score - a.score)
                         .map((player, index) => {

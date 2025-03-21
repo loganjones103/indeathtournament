@@ -33,7 +33,7 @@ export default function ScoreSubmission({ tournamentId, userId, onScoreSubmit }:
     };
 
     return (
-        <div className="mt-4 p-4 border rounded shadow">
+        <div className="mt-4 p-4 border rounded shadow blue-border">
             <h3 className="text-lg font-bold">Submit Your Score</h3>
             <form onSubmit={handleSubmit}>
                 <input 

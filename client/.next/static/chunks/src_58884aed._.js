@@ -39,7 +39,7 @@ function ScoreSubmission({ tournamentId, userId, onScoreSubmit }) {
         }
     };
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-        className: "mt-4 p-4 border rounded shadow",
+        className: "mt-4 p-4 border rounded shadow blue-border",
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
                 className: "text-lg font-bold",
@@ -126,10 +126,12 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/navigation.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/axios/lib/axios.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/client/app-dir/link.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ScoreSubmission$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/components/ScoreSubmission.tsx [app-client] (ecmascript)");
 ;
 var _s = __turbopack_context__.k.signature();
 "use client";
+;
 ;
 ;
 ;
@@ -216,10 +218,43 @@ function TournamentDetails() {
                 lineNumber: 70,
                 columnNumber: 13
             }, this),
-            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
-                className: "text-xl font-bold mt-6",
-                children: "Leaderboard"
-            }, void 0, false, {
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                className: "relative w-full max-w-2xl mt-6",
+                children: [
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
+                        href: "/tournaments",
+                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                            className: "absolute left-0 top-1/2 -translate-y-1/2 text-blue-600 cursor-pointer hover:underline",
+                            children: "Back"
+                        }, void 0, false, {
+                            fileName: "[project]/src/app/tournaments/[id]/page.tsx",
+                            lineNumber: 74,
+                            columnNumber: 21
+                        }, this)
+                    }, void 0, false, {
+                        fileName: "[project]/src/app/tournaments/[id]/page.tsx",
+                        lineNumber: 73,
+                        columnNumber: 17
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
+                        className: "text-xl font-bold text-center",
+                        children: "Leaderboard"
+                    }, void 0, false, {
+                        fileName: "[project]/src/app/tournaments/[id]/page.tsx",
+                        lineNumber: 76,
+                        columnNumber: 17
+                    }, this),
+                    user && (user._id === tournament.createdBy._id || user.role === "admin") && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                        onClick: handleDelete,
+                        className: "absolute right-0 top-1/2 -translate-y-1/2 text-red-600 cursor-pointer hover:underline",
+                        children: "Delete"
+                    }, void 0, false, {
+                        fileName: "[project]/src/app/tournaments/[id]/page.tsx",
+                        lineNumber: 78,
+                        columnNumber: 21
+                    }, this)
+                ]
+            }, void 0, true, {
                 fileName: "[project]/src/app/tournaments/[id]/page.tsx",
                 lineNumber: 72,
                 columnNumber: 13
@@ -229,14 +264,14 @@ function TournamentDetails() {
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("thead", {
                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("tr", {
-                            className: "bg-gray-200",
+                            className: "bg-gray-200 lb-header",
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
                                     className: "p-2",
                                     children: "Rank"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/tournaments/[id]/page.tsx",
-                                    lineNumber: 76,
+                                    lineNumber: 87,
                                     columnNumber: 25
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -244,7 +279,7 @@ function TournamentDetails() {
                                     children: "Player"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/tournaments/[id]/page.tsx",
-                                    lineNumber: 77,
+                                    lineNumber: 88,
                                     columnNumber: 25
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -252,7 +287,7 @@ function TournamentDetails() {
                                     children: "Score"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/tournaments/[id]/page.tsx",
-                                    lineNumber: 78,
+                                    lineNumber: 89,
                                     columnNumber: 25
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("th", {
@@ -260,21 +295,22 @@ function TournamentDetails() {
                                     children: "Proof"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/tournaments/[id]/page.tsx",
-                                    lineNumber: 79,
+                                    lineNumber: 90,
                                     columnNumber: 25
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/tournaments/[id]/page.tsx",
-                            lineNumber: 75,
+                            lineNumber: 86,
                             columnNumber: 21
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/src/app/tournaments/[id]/page.tsx",
-                        lineNumber: 74,
+                        lineNumber: 85,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("tbody", {
+                        className: "lb-body",
                         children: (tournament?.participants ?? []).sort((a, b)=>b.score - a.score).map((player, index)=>{
                             return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("tr", {
                                 children: [
@@ -283,7 +319,7 @@ function TournamentDetails() {
                                         children: index + 1
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/tournaments/[id]/page.tsx",
-                                        lineNumber: 88,
+                                        lineNumber: 99,
                                         columnNumber: 37
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -291,7 +327,7 @@ function TournamentDetails() {
                                         children: player.username
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/tournaments/[id]/page.tsx",
-                                        lineNumber: 89,
+                                        lineNumber: 100,
                                         columnNumber: 37
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -299,7 +335,7 @@ function TournamentDetails() {
                                         children: player.score ?? "N/A"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/tournaments/[id]/page.tsx",
-                                        lineNumber: 90,
+                                        lineNumber: 101,
                                         columnNumber: 37
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("td", {
@@ -311,30 +347,30 @@ function TournamentDetails() {
                                             children: "View Proof"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/tournaments/[id]/page.tsx",
-                                            lineNumber: 93,
+                                            lineNumber: 104,
                                             columnNumber: 45
                                         }, this) : "No Proof"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/tournaments/[id]/page.tsx",
-                                        lineNumber: 91,
+                                        lineNumber: 102,
                                         columnNumber: 37
                                     }, this)
                                 ]
                             }, player.userId || `${index}-${player.username}`, true, {
                                 fileName: "[project]/src/app/tournaments/[id]/page.tsx",
-                                lineNumber: 87,
+                                lineNumber: 98,
                                 columnNumber: 33
                             }, this);
                         })
                     }, void 0, false, {
                         fileName: "[project]/src/app/tournaments/[id]/page.tsx",
-                        lineNumber: 82,
+                        lineNumber: 93,
                         columnNumber: 17
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/tournaments/[id]/page.tsx",
-                lineNumber: 73,
+                lineNumber: 84,
                 columnNumber: 13
             }, this),
             user && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$ScoreSubmission$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
@@ -343,7 +379,7 @@ function TournamentDetails() {
                 onScoreSubmit: fetchTournament
             }, void 0, false, {
                 fileName: "[project]/src/app/tournaments/[id]/page.tsx",
-                lineNumber: 109,
+                lineNumber: 120,
                 columnNumber: 22
             }, this)
         ]

@@ -14,7 +14,7 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
+    --background: #0d1017;
     --foreground: #ededed;
   }
 }
@@ -31,4 +31,27 @@ body {
 
 button {
   cursor: pointer;
+}
+
+table {
+  border-color: rgba(56, 139, 253, 0.4);
+  border-radius: 6px;
+}
+
+thead tr {
+  border-color: rgba(56, 139, 253, 0.4);
+}
+
+.lb-body tr td {
+  text-align: center;
+}
+
+.lb-header {
+  background-color: #121d2f;
+  border-color: rgba(56, 139, 253, 0.4);
+}
+
+.blue-border {
+  border-color: rgba(56, 139, 253, 0.4);
+  border-radius: 6px;
 }
