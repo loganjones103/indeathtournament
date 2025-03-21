@@ -17,7 +17,7 @@ export default function Home() {
                     </button>
                 </Link>
 
-                <Link href="/tournaments/create">
+                <Link href="/create-tournament">
                     <button className="px-6 py-3 bg-green-500 text-white rounded-lg text-lg shadow hover:bg-green-600 transition">
                         Create a Tournament
                     </button>

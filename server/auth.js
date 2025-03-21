@@ -49,7 +49,7 @@ passport.use(new GoogleStrategy({
                 username,
                 email: profile.emails[0].value,
                 avatar: avatarFilename ? `/uploads/${avatarFilename}` : "",
-                role: "player"
+                roles: ["player"]
             });
         }
 
@@ -68,7 +68,7 @@ passport.serializeUser((user, done) => {
 passport.deserializeUser(async (id, done) => {
     try {
         console.log("🔍 Finding User by ID:", id);
-        const user = await User.findById(id).select("username email avatar role");
+        const user = await User.findById(id).select("username email avatar roles"); // 🔥 Use roles instead of role
         if (!user) return done(null, false);
         console.log("✅ User Found:", user);
         done(null, user);

@@ -14,7 +14,7 @@ export default function AuthWrapper({ children }: { children: React.ReactNode })
             try {
                 const res = await axios.get("http://localhost:5000/auth/user", { withCredentials: true });
 
-                if (res.data.role === "admin") {
+                if (res.data.roles.includes("admin") || res.data.roles.includes("creator")) {
                     setUser(res.data);
                 } else {
                     router.push("/"); // Redirect non-admins

@@ -5,7 +5,7 @@ const UserSchema = new mongoose.Schema({
     username: String,
     email: String,
     avatar: String,
-    role: { type: String, enum: ["player", "admin"], default: "player" }, // 🔥 Add roles
+    roles: { type: [String], default: ["player"] }, // 🔥 Add roles
     createdAt: { type: Date, default: Date.now }
 });
 
