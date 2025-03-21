@@ -1,22 +1,25 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import axios from "axios";
 
 interface Props {
     tournamentId: string;
     userId: string;
-    onScoreSubmit: () => void; // ✅ Callback to refresh leaderboard
+    onScoreSubmit: () => void;
 }
 
 export default function ScoreSubmission({ tournamentId, userId, onScoreSubmit }: Props) {
     const [score, setScore] = useState("");
     const [image, setImage] = useState<File | null>(null);
     const [message, setMessage] = useState("");
+    
+    // ✅ Ref for the file input
+    const fileInputRef = useRef<HTMLInputElement>(null);
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files.length > 0) {
-            setImage(e.target.files[0]); // ✅ Store selected file
+            setImage(e.target.files[0]); 
         }
     };
 
@@ -29,7 +32,7 @@ export default function ScoreSubmission({ tournamentId, userId, onScoreSubmit }:
 
         const formData = new FormData();
         formData.append("score", score);
-        formData.append("proof", image); // ✅ Append image file
+        formData.append("proof", image);
 
         try {
             const res = await axios.post(
@@ -39,16 +42,22 @@ export default function ScoreSubmission({ tournamentId, userId, onScoreSubmit }:
             );
 
             setMessage(res.data.message);
-            setScore("");  // ✅ Clear input field
-            setImage(null); // ✅ Reset file input
-            onScoreSubmit(); // ✅ Refresh leaderboard
+            setScore("");  
+            setImage(null);
+
+            // ✅ Reset file input field
+            if (fileInputRef.current) {
+                fileInputRef.current.value = "";
+            }
+
+            onScoreSubmit(); 
         } catch (err: any) {
             setMessage(err.response?.data?.message || "Error submitting score.");
         }
     };
 
     return (
-        <div className="mt-4 p-4 border rounded shadow blue-border">
+        <div className="mt-4 p-4 max-w-2xl border rounded shadow blue-border">
             <h3 className="text-lg font-bold">Submit Your Score</h3>
             <form onSubmit={handleSubmit} encType="multipart/form-data">
                 <input 
@@ -64,6 +73,7 @@ export default function ScoreSubmission({ tournamentId, userId, onScoreSubmit }:
                     accept="image/*" 
                     onChange={handleFileChange} 
                     className="border p-2 rounded w-full mt-2"
+                    ref={fileInputRef} // ✅ Set ref to file input
                     required
                 />
                 <button type="submit" className="mt-2 px-4 py-2 bg-blue-500 text-white rounded">

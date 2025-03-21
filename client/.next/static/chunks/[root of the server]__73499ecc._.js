@@ -9897,7 +9897,7 @@ function pushErrorFilterDuplicates(errors, err) {
         err
     ];
 }
-const shouldDisableDevIndicator = ((_process_env___NEXT_DEV_INDICATOR = ("TURBOPACK compile-time value", true)) == null ? void 0 : _process_env___NEXT_DEV_INDICATOR.toString()) === 'false';
+const shouldDisableDevIndicator = ((_process_env___NEXT_DEV_INDICATOR = ("TURBOPACK compile-time value", false)) == null ? void 0 : _process_env___NEXT_DEV_INDICATOR.toString()) === 'false';
 const INITIAL_OVERLAY_STATE = {
     nextId: 1,
     buildError: null,
@@ -12102,15 +12102,9 @@ function handleAvailableHash(hash) {
     mostRecentCompilationHash = hash;
 }
 function handleStaticIndicator() {
-    if ("TURBOPACK compile-time truthy", 1) {
+    if ("TURBOPACK compile-time falsy", 0) {
+        "TURBOPACK unreachable";
         var _window_next_router_components__app;
-        const routeInfo = window.next.router.components[window.next.router.pathname];
-        const pageComponent = routeInfo == null ? void 0 : routeInfo.Component;
-        const appComponent = (_window_next_router_components__app = window.next.router.components['/_app']) == null ? void 0 : _window_next_router_components__app.Component;
-        const isDynamicPage = Boolean(pageComponent == null ? void 0 : pageComponent.getInitialProps) || Boolean(routeInfo.__N_SSP);
-        const hasAppGetInitialProps = Boolean(appComponent == null ? void 0 : appComponent.getInitialProps) && (appComponent == null ? void 0 : appComponent.getInitialProps) !== (appComponent == null ? void 0 : appComponent.origGetInitialProps);
-        const isPageStatic = window.location.pathname in isrManifest || !isDynamicPage && !hasAppGetInitialProps;
-        (0, _client.onStaticIndicator)(isPageStatic);
     }
 }
 /** Handles messages from the sevrer for the Pages Router. */ function processMessage(obj) {
@@ -21378,13 +21372,10 @@ const _websocket = __turbopack_context__.r("[project]/node_modules/next/dist/cli
 const _devbuildindicator = __turbopack_context__.r("[project]/node_modules/next/dist/client/dev/dev-build-indicator/internal/dev-build-indicator.js [client] (ecmascript)");
 const _handledevbuildindicatorhmrevents = __turbopack_context__.r("[project]/node_modules/next/dist/client/dev/dev-build-indicator/internal/handle-dev-build-indicator-hmr-events.js [client] (ecmascript)");
 const initializeDevBuildIndicatorForPageRouter = ()=>{
-    if ("TURBOPACK compile-time falsy", 0) {
-        "TURBOPACK unreachable";
+    if ("TURBOPACK compile-time truthy", 1) {
+        return;
     }
-    _devbuildindicator.devBuildIndicator.initialize();
-    // Add message listener specifically for Pages Router to handle lifecycle events
-    // related to dev builds (building, built, sync)
-    (0, _websocket.addMessageListener)(_handledevbuildindicatorhmrevents.handleDevBuildIndicatorHmrEvents);
+    "TURBOPACK unreachable";
 };
 if ((typeof exports.default === 'function' || typeof exports.default === 'object' && exports.default !== null) && typeof exports.default.__esModule === 'undefined') {
     Object.defineProperty(exports.default, '__esModule', {

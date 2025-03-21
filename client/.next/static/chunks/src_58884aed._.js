@@ -21,9 +21,11 @@ function ScoreSubmission({ tournamentId, userId, onScoreSubmit }) {
     const [score, setScore] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("");
     const [image, setImage] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
     const [message, setMessage] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("");
+    // ✅ Ref for the file input
+    const fileInputRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(null);
     const handleFileChange = (e)=>{
         if (e.target.files && e.target.files.length > 0) {
-            setImage(e.target.files[0]); // ✅ Store selected file
+            setImage(e.target.files[0]);
         }
     };
     const handleSubmit = async (e)=>{
@@ -34,7 +36,7 @@ function ScoreSubmission({ tournamentId, userId, onScoreSubmit }) {
         }
         const formData = new FormData();
         formData.append("score", score);
-        formData.append("proof", image); // ✅ Append image file
+        formData.append("proof", image);
         try {
             const res = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].post(`http://localhost:5000/api/tournaments/${tournamentId}/submit-score`, formData, {
                 withCredentials: true,
@@ -43,22 +45,26 @@ function ScoreSubmission({ tournamentId, userId, onScoreSubmit }) {
                 }
             });
             setMessage(res.data.message);
-            setScore(""); // ✅ Clear input field
-            setImage(null); // ✅ Reset file input
-            onScoreSubmit(); // ✅ Refresh leaderboard
+            setScore("");
+            setImage(null);
+            // ✅ Reset file input field
+            if (fileInputRef.current) {
+                fileInputRef.current.value = "";
+            }
+            onScoreSubmit();
         } catch (err) {
             setMessage(err.response?.data?.message || "Error submitting score.");
         }
     };
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-        className: "mt-4 p-4 border rounded shadow blue-border",
+        className: "mt-4 p-4 max-w-2xl border rounded shadow blue-border",
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
                 className: "text-lg font-bold",
                 children: "Submit Your Score"
             }, void 0, false, {
                 fileName: "[project]/src/components/ScoreSubmission.tsx",
-                lineNumber: 52,
+                lineNumber: 61,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
@@ -74,7 +80,7 @@ function ScoreSubmission({ tournamentId, userId, onScoreSubmit }) {
                         required: true
                     }, void 0, false, {
                         fileName: "[project]/src/components/ScoreSubmission.tsx",
-                        lineNumber: 54,
+                        lineNumber: 63,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -82,10 +88,11 @@ function ScoreSubmission({ tournamentId, userId, onScoreSubmit }) {
                         accept: "image/*",
                         onChange: handleFileChange,
                         className: "border p-2 rounded w-full mt-2",
+                        ref: fileInputRef,
                         required: true
                     }, void 0, false, {
                         fileName: "[project]/src/components/ScoreSubmission.tsx",
-                        lineNumber: 62,
+                        lineNumber: 71,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -94,13 +101,13 @@ function ScoreSubmission({ tournamentId, userId, onScoreSubmit }) {
                         children: "Submit Score"
                     }, void 0, false, {
                         fileName: "[project]/src/components/ScoreSubmission.tsx",
-                        lineNumber: 69,
+                        lineNumber: 79,
                         columnNumber: 17
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/ScoreSubmission.tsx",
-                lineNumber: 53,
+                lineNumber: 62,
                 columnNumber: 13
             }, this),
             message && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -108,17 +115,17 @@ function ScoreSubmission({ tournamentId, userId, onScoreSubmit }) {
                 children: message
             }, void 0, false, {
                 fileName: "[project]/src/components/ScoreSubmission.tsx",
-                lineNumber: 73,
+                lineNumber: 83,
                 columnNumber: 25
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/components/ScoreSubmission.tsx",
-        lineNumber: 51,
+        lineNumber: 60,
         columnNumber: 9
     }, this);
 }
-_s(ScoreSubmission, "B0zZ/M54+JtH86PlC5GWy05bsnk=");
+_s(ScoreSubmission, "l9JYrmM6vl55w7UL5aTgJNcVqN0=");
 _c = ScoreSubmission;
 var _c;
 __turbopack_context__.k.register(_c, "ScoreSubmission");

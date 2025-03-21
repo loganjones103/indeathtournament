@@ -32,7 +32,7 @@ export default function TournamentForm() {
             });
             setMessage("Tournament created successfully!");
             setFormData({ name: "", description: "", startDate: "", endDate: "", type: "high-score", rules: "" });
-        } catch (err) {
+        } catch (err: any) {
             setMessage("Error: " + err.response?.data?.message || "Failed to create tournament.");
         }
     };

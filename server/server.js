@@ -7,43 +7,59 @@ const passport = require("passport");
 const path = require("path");
 require("dotenv").config();
 
-require("./models/User"); // Import User model
-require("./auth"); // Import Passport config
+require("./models/User");
+require("./auth");
 
 const authRoutes = require("./routes/authRoutes");
 const tournamentRoutes = require("./routes/tournamentRoutes");
 
 const app = express();
 
+// ✅ Serve static uploads
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+
+// ✅ CORS - clean and correct
 app.use(cors({
     origin: "http://localhost:3000",
-    credentials: true // ✅ Allows cookies to be sent
+    credentials: true,
 }));
 
-app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+// ✅ Ensure CORS headers are set for every response
+app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "http://localhost:3000");
+    res.header("Access-Control-Allow-Credentials", "true");
+    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
+
+// ✅ Handle preflight requests
+app.options("*", cors({
+    origin: "http://localhost:3000",
+    credentials: true,
+}));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// ✅ Ensure Sessions Are Set Up Before Passport
+// ✅ Sessions (before passport)
 app.use(session({
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
-    store: MongoStore.create({ mongoUrl: process.env.MONGO_URI }), // 🔥 Store sessions in MongoDB
+    store: MongoStore.create({ mongoUrl: process.env.MONGO_URI }),
     cookie: {
-        secure: false,  // Set to `true` if using HTTPS
+        secure: false,
         httpOnly: true,
-        maxAge: 24 * 60 * 60 * 1000, // 1-day session
+        maxAge: 24 * 60 * 60 * 1000,
     }
 }));
 
-
-// ✅ Initialize Passport Middleware After Session
+// ✅ Passport
 app.use(passport.initialize());
 app.use(passport.session());
 
-// ✅ Debug Session Data
+// ✅ Debugging (optional)
 app.use((req, res, next) => {
     console.log("🔍 Session Data:", req.session);
     console.log("🔍 User Data:", req.user);
@@ -58,6 +74,7 @@ app.get("/", (req, res) => {
     res.send("In Death Tournament Backend Running!");
 });
 
+// ✅ Connect DB
 mongoose.connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -65,11 +82,10 @@ mongoose.connect(process.env.MONGO_URI, {
     .then(() => console.log("✅ MongoDB Connected Successfully!"))
     .catch(err => {
         console.error("❌ MongoDB Connection Error:", err);
-        process.exit(1); // Exit process if connection fails
+        process.exit(1);
     });
 
-
-// ✅ Start Server
+// ✅ Start server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
     console.log(`🚀 Server running on port ${PORT}`);

@@ -18,16 +18,19 @@ router.get(
 );
 
 // ✅ Logout
-router.get("/logout", (req, res, next) => {
-    req.logout((err) => {
+router.get("/logout", (req, res) => {
+    req.logout(err => {
         if (err) {
-            return next(err);
+            console.error("Logout Error:", err);
+            return res.status(500).json({ message: "Logout failed" });
         }
         req.session.destroy(() => {
-            res.redirect("http://localhost:3000/");
+            res.clearCookie("connect.sid", { path: "/", httpOnly: true });
+            return res.json({ message: "Logged out successfully" });
         });
     });
 });
+
 
 // ✅ Get Logged-In User
 router.get("/user", (req, res) => {
