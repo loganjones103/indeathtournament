@@ -11,21 +11,36 @@ interface Props {
 
 export default function ScoreSubmission({ tournamentId, userId, onScoreSubmit }: Props) {
     const [score, setScore] = useState("");
-    const [proof, setProof] = useState("");
+    const [image, setImage] = useState<File | null>(null);
     const [message, setMessage] = useState("");
+
+    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files && e.target.files.length > 0) {
+            setImage(e.target.files[0]); // ✅ Store selected file
+        }
+    };
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        if (!image) {
+            setMessage("Please upload an image as proof.");
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append("score", score);
+        formData.append("proof", image); // ✅ Append image file
 
         try {
-            const res = await axios.post(`http://localhost:5000/api/tournaments/${tournamentId}/submit-score`, 
-                { score, proof }, 
-                { withCredentials: true }
+            const res = await axios.post(
+                `http://localhost:5000/api/tournaments/${tournamentId}/submit-score`, 
+                formData, 
+                { withCredentials: true, headers: { "Content-Type": "multipart/form-data" } }
             );
 
             setMessage(res.data.message);
             setScore("");  // ✅ Clear input field
-            setProof("");   // ✅ Clear input field
+            setImage(null); // ✅ Reset file input
             onScoreSubmit(); // ✅ Refresh leaderboard
         } catch (err: any) {
             setMessage(err.response?.data?.message || "Error submitting score.");
@@ -35,7 +50,7 @@ export default function ScoreSubmission({ tournamentId, userId, onScoreSubmit }:
     return (
         <div className="mt-4 p-4 border rounded shadow blue-border">
             <h3 className="text-lg font-bold">Submit Your Score</h3>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} encType="multipart/form-data">
                 <input 
                     type="number" 
                     value={score} 
@@ -45,10 +60,9 @@ export default function ScoreSubmission({ tournamentId, userId, onScoreSubmit }:
                     required
                 />
                 <input 
-                    type="text" 
-                    value={proof} 
-                    onChange={(e) => setProof(e.target.value)} 
-                    placeholder="Screenshot URL (Proof)"
+                    type="file" 
+                    accept="image/*" 
+                    onChange={handleFileChange} 
                     className="border p-2 rounded w-full mt-2"
                     required
                 />

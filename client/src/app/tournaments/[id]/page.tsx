@@ -27,16 +27,17 @@ export default function TournamentDetails() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
 
+    // 🆕 Modal state
+    const [modalImage, setModalImage] = useState<string | null>(null);
+
     useEffect(() => {
         if (!id) return;
 
-        // ✅ Fetch tournament data
         axios.get(`http://localhost:5000/api/tournaments/${id}`)
             .then(res => setTournament(res.data))
             .catch(() => setError("Tournament not found"))
             .finally(() => setLoading(false));
 
-        // ✅ Fetch user data
         axios.get("http://localhost:5000/auth/user", { withCredentials: true })
             .then(res => setUser(res.data))
             .catch(() => setUser(null));
@@ -65,9 +66,9 @@ export default function TournamentDetails() {
     if (!tournament) return null;
 
     return (
-        <main className="flex flex-col items-center p-10">
-            <h1 className="text-3xl font-bold">{tournament?.name}</h1>
-            <p className="text-lg">{tournament?.description}</p>
+        <main className="flex flex-col items-center p-10 relative">
+            <h1 className="text-3xl font-bold">{tournament.name}</h1>
+            <p className="text-lg">{tournament.description}</p>
 
             <div className="relative w-full max-w-2xl mt-6">
                 <Link href="/tournaments">
@@ -91,33 +92,41 @@ export default function TournamentDetails() {
                     </tr>
                 </thead>
                 <tbody className="lb-body">
-                    {(tournament?.participants ?? [])
+                    {(tournament.participants ?? [])
                         .sort((a, b) => b.score - a.score)
-                        .map((player, index) => {
-                            return (
-                                <tr key={player.userId || `${index}-${player.username}`}>
-                                    <td className="p-2">{index + 1}</td>
-                                    <td className="p-2">{player.username}</td>
-                                    <td className="p-2">{player.score ?? "N/A"}</td>
-                                    <td className="p-2">
-                                        {player.proof ? (
-                                            <a href={player.proof} target="_blank" className="text-blue-500 underline">
-                                                View Proof
-                                            </a>
-                                        ) : (
-                                            "No Proof"
-                                        )}
-                                    </td>
-                                </tr>
-                            );
-                        }
-                        )}
+                        .map((player, index) => (
+                            <tr key={player.userId || `${index}-${player.username}`}>
+                                <td className="p-2">{index + 1}</td>
+                                <td className="p-2">{player.username}</td>
+                                <td className="p-2">{player.score ?? "N/A"}</td>
+                                <td className="p-2">
+                                    {player.proof ? (
+                                        <img
+                                            src={`http://localhost:5000${player.proof}`}
+                                            alt="Proof"
+                                            className="w-20 h-20 rounded center-img cursor-pointer hover:opacity-80"
+                                            onClick={() => setModalImage(`http://localhost:5000${player.proof}`)}
+                                        />
+                                    ) : (
+                                        "No Proof"
+                                    )}
+                                </td>
+                            </tr>
+                        ))}
                 </tbody>
-
             </table>
 
-            {/* ✅ Score Submission Form (Only show if logged in) */}
             {user && <ScoreSubmission tournamentId={id} userId={user._id} onScoreSubmit={fetchTournament} />}
+
+            {/* 🆕 Modal for enlarged image */}
+            {modalImage && (
+                <div
+                    className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50"
+                    onClick={() => setModalImage(null)}
+                >
+                    <img src={modalImage} alt="Proof Full Size" className="max-w-[90%] max-h-[90%] rounded-lg border-4 border-white" />
+                </div>
+            )}
         </main>
     );
 }

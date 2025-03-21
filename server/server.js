@@ -4,6 +4,7 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const session = require("express-session");
 const passport = require("passport");
+const path = require("path");
 require("dotenv").config();
 
 require("./models/User"); // Import User model
@@ -18,6 +19,8 @@ app.use(cors({
     origin: "http://localhost:3000",
     credentials: true // ✅ Allows cookies to be sent
 }));
+
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

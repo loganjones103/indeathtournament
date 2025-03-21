@@ -25,10 +25,9 @@ export default function TournamentList() {
     useEffect(() => {
         axios.get("http://localhost:5000/api/tournaments")
             .then(res => setTournaments(res.data))
-            .catch(err => setError("Failed to load tournaments"))
+            .catch(() => setError("Failed to load tournaments"))
             .finally(() => setLoading(false));
 
-        // Get authenticated user
         axios.get("http://localhost:5000/auth/user", { withCredentials: true })
             .then(res => setUser(res.data))
             .catch(() => setUser(null));
@@ -41,11 +40,26 @@ export default function TournamentList() {
         }
 
         try {
-            const res = await axios.post(`http://localhost:5000/api/tournaments/${tournamentId}/join`, {}, { withCredentials: true });
+            const res = await axios.post(
+                `http://localhost:5000/api/tournaments/${tournamentId}/join`,
+                {},
+                { withCredentials: true }
+            );
             alert(res.data.message);
-            setTournaments(tournaments.map(t =>
-                t._id === tournamentId ? { ...t, participants: [...(t.participants || []), { userId: user._id, username: user.username }] } : t
-            ));
+
+            setTournaments(prev =>
+                prev.map(t =>
+                    t._id === tournamentId
+                        ? {
+                            ...t,
+                            participants: [
+                                ...(t.participants || []),
+                                { userId: user._id, username: user.username }
+                            ]
+                        }
+                        : t
+                )
+            );
         } catch (err: any) {
             alert(err.response?.data?.message || "Failed to join tournament.");
         }
@@ -58,16 +72,22 @@ export default function TournamentList() {
         <main className="flex flex-col items-center p-10">
             <div className="relative w-full max-w-3xl mt-6 mb-6">
                 <Link href="/">
-                    <p className="absolute left-0 top-1/2 -translate-y-1/2 text-blue-600 cursor-pointer hover:underline">Back</p>
+                    <p className="absolute left-0 top-1/2 -translate-y-1/2 text-blue-600 cursor-pointer hover:underline">
+                        Back
+                    </p>
                 </Link>
                 <h1 className="text-3xl font-bold text-center">Tournaments</h1>
             </div>
+
             <div className="w-full max-w-3xl">
                 {tournaments.length > 0 ? (
                     tournaments.map(tournament => (
                         <div key={tournament._id} className="p-4 mb-4 border rounded shadow blue-border">
                             <h2 className="text-xl font-bold">
-                                <Link href={`/tournaments/${tournament._id}`} className="text-blue-500 underline">
+                                <Link
+                                    href={`/tournaments/${tournament._id}`}
+                                    className="text-blue-500 underline"
+                                >
                                     {tournament.name}
                                 </Link>
                             </h2>
@@ -79,9 +99,13 @@ export default function TournamentList() {
                             <p className="text-sm"><strong>Type:</strong> {tournament.type}</p>
                             <p className="text-sm"><strong>Rules:</strong> {tournament.rules}</p>
                             {tournament.createdBy && (
-                                <p className="text-sm text-gray-500">Created by: {tournament.createdBy.username}</p>
+                                <p className="text-sm text-gray-500">
+                                    Created by: {tournament.createdBy.username}
+                                </p>
                             )}
-                            <p className="text-sm"><strong>Participants:</strong> {tournament.participants?.length || 0}</p>
+                            <p className="text-sm">
+                                <strong>Participants:</strong> {tournament.participants?.length || 0}
+                            </p>
 
                             {user && !tournament.participants?.some(p => p.userId === user._id) && (
                                 <button

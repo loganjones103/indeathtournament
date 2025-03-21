@@ -1,6 +1,8 @@
 const express = require("express");
+const multer = require("multer");
 const Tournament = require("../models/Tournament");
 const { requireAuth, requireAdmin } = require("../middlewares/authMiddleware");
+const path = require("path");
 
 
 const router = express.Router();
@@ -121,24 +123,42 @@ router.post("/:id/join", requireAuth, async (req, res) => {
     }
 });
 
+// ✅ Configure Multer for file uploads
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, "uploads/"); // Store images in "uploads" folder
+    },
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + path.extname(file.originalname)); // Unique filename
+    }
+});
+
+const upload = multer({ storage });
+
 // ✅ Submit Score with Proof
-router.post("/:id/submit-score", requireAuth, async (req, res) => {
+router.post("/:id/submit-score", requireAuth, upload.single("proof"), async (req, res) => {
+    console.log('ran'); // ✅ This should now log when the request is made
+
     try {
-        const { score, proof } = req.body;
+        console.log("🔍 Received Score:", req.body.score);
+        console.log("🔍 Received File:", req.file);
+
+        const { score } = req.body;
         const tournament = await Tournament.findById(req.params.id);
         if (!tournament) return res.status(404).json({ message: "Tournament not found" });
 
-        // ✅ Find player in participants
         const player = tournament.participants.find(p => p.userId.toString() === req.user._id.toString());
         if (!player) return res.status(403).json({ message: "You are not in this tournament!" });
 
-        // ✅ Update player score and proof
         player.score = score;
-        player.proof = proof;
+        player.proof = req.file ? `/uploads/${req.file.filename}` : ""; // ✅ Store image path
         await tournament.save();
+
+        console.log("✅ Updated Player:", player);
 
         res.json({ message: "Score submitted successfully!", tournament });
     } catch (err) {
+        console.error("❌ Error:", err);
         res.status(500).json({ error: err.message });
     }
 });

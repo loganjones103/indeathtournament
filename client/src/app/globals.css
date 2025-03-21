@@ -55,3 +55,7 @@ thead tr {
   border-color: rgba(56, 139, 253, 0.4);
   border-radius: 6px;
 }
+
+.center-img {
+  margin: 0 auto;
+}
