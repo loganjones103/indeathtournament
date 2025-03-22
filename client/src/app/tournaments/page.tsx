@@ -12,6 +12,7 @@ interface Tournament {
     startDate: string;
     endDate: string;
     type: string;
+    weaponType?: string;
     rules: string;
     createdBy?: { username: string };
     participants?: { userId: string; username: string }[];
@@ -126,6 +127,7 @@ export default function TournamentList() {
                                     <strong> End:</strong> {new Date(tournament.endDate).toLocaleDateString()}
                                 </p>
                                 <p className="text-sm"><strong>Type:</strong> {tournament.type}</p>
+                                <p className="text-sm"><strong>Weapon Type:</strong> {tournament.weaponType || "Any"}</p>
                                 <p className="text-sm"><strong>Rules:</strong> {tournament.rules}</p>
                                 {tournament.createdBy && (
                                     <p className="text-sm text-gray-500">

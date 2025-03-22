@@ -21,6 +21,11 @@ const TournamentSchema = new mongoose.Schema({
         enum: ["high-score", "speed-run", "survival"],
         required: true,
     },
+    weaponType: {
+        type: String,
+        enum: ["Bow", "Crossbow", "Any"],
+        default: "Any"
+    },
     rules: {
         type: String,
     },

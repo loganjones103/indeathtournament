@@ -14,6 +14,7 @@ interface Tournament {
     startDate: string;
     endDate: string;
     type: string;
+    weaponType?: string;
     rules: string;
     createdBy: { _id: string; username: string };
     participants: { userId: string; username: string; score: number; proof: string }[];
@@ -27,7 +28,6 @@ export default function TournamentDetails() {
     const [user, setUser] = useState<{ _id: string; username: string; roles: string[] } | null>(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
-
     const [modalImage, setModalImage] = useState<string | null>(null);
 
     const rowVariants = {
@@ -98,7 +98,14 @@ export default function TournamentDetails() {
             >
                 {tournament.description}
             </motion.p>
-            <p className="text-sm text-gray-400 mt-2">{tournament.rules}</p>
+
+            <div className="text-sm text-gray-400 mt-2 space-y-1 text-center">
+                <p><strong>Type:</strong> {tournament.type}</p>
+                <p><strong>Weapon Type:</strong> {tournament.weaponType || "Any"}</p>
+                <p><strong>Rules:</strong> {tournament.rules}</p>
+                <p><strong>Start:</strong> {new Date(tournament.startDate).toLocaleDateString()} | <strong>End:</strong> {new Date(tournament.endDate).toLocaleDateString()}</p>
+                <p><strong>Created by:</strong> {tournament.createdBy.username}</p>
+            </div>
 
             <div className="relative w-full max-w-2xl mt-6">
                 <Link href="/tournaments">

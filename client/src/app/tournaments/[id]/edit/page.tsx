@@ -5,9 +5,9 @@ import { useRouter, useParams } from "next/navigation";
 import axios from "axios";
 
 export default function EditTournament() {
-    const params = useParams(); // ✅ Fetch dynamic ID
+    const params = useParams();
     const router = useRouter();
-    const id = params.id as string; // Ensure it's a string
+    const id = params.id as string;
 
     const [tournament, setTournament] = useState<any>(null);
     const [user, setUser] = useState<any>(null);
@@ -19,13 +19,13 @@ export default function EditTournament() {
         startDate: "",
         endDate: "",
         type: "high-score",
+        weaponType: "Any",
         rules: ""
     });
 
     useEffect(() => {
         if (!id) return;
 
-        // ✅ Fetch Tournament
         axios.get(`http://localhost:5000/api/tournaments/${id}`)
             .then(res => {
                 setTournament(res.data);
@@ -35,13 +35,13 @@ export default function EditTournament() {
                     startDate: res.data.startDate.split("T")[0],
                     endDate: res.data.endDate.split("T")[0],
                     type: res.data.type,
+                    weaponType: res.data.weaponType || "Any",
                     rules: res.data.rules
                 });
             })
             .catch(() => setError("Tournament not found"))
             .finally(() => setLoading(false));
 
-        // ✅ Fetch User
         axios.get("http://localhost:5000/auth/user", { withCredentials: true })
             .then(res => setUser(res.data))
             .catch(() => setUser(null));
@@ -66,7 +66,6 @@ export default function EditTournament() {
     if (error) return <p className="text-red-500">{error}</p>;
     if (!tournament) return null;
 
-    // ✅ Restrict Editing to Admins or the Tournament Creator
     if (!user || !tournament?.createdBy || (!user.roles.includes("admin") && user._id !== tournament.createdBy._id)) {
         return <p className="text-red-500">Access denied. You cannot edit this tournament.</p>;
     }
@@ -91,6 +90,13 @@ export default function EditTournament() {
                 <select name="type" value={formData.type} onChange={handleChange} className="border p-2 w-full bg-[#0d1017] text-white">
                     <option value="high-score">High Score</option>
                     <option value="elimination">Elimination</option>
+                </select>
+
+                <label className="text-white block mt-2">Weapon Type:</label>
+                <select name="weaponType" value={formData.weaponType} onChange={handleChange} className="border p-2 w-full bg-[#0d1017] text-white">
+                    <option value="Any">Any</option>
+                    <option value="Bow">Bow</option>
+                    <option value="Crossbow">Crossbow</option>
                 </select>
 
                 <label className="text-white block mt-2">Rules:</label>

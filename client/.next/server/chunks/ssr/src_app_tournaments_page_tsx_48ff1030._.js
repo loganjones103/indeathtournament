@@ -80,7 +80,7 @@ function TournamentList() {
         children: "Loading tournaments..."
     }, void 0, false, {
         fileName: "[project]/src/app/tournaments/page.tsx",
-        lineNumber: 84,
+        lineNumber: 85,
         columnNumber: 25
     }, this);
     if (error) return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -88,7 +88,7 @@ function TournamentList() {
         children: error
     }, void 0, false, {
         fileName: "[project]/src/app/tournaments/page.tsx",
-        lineNumber: 85,
+        lineNumber: 86,
         columnNumber: 23
     }, this);
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("main", {
@@ -104,12 +104,12 @@ function TournamentList() {
                             children: "Back"
                         }, void 0, false, {
                             fileName: "[project]/src/app/tournaments/page.tsx",
-                            lineNumber: 91,
+                            lineNumber: 92,
                             columnNumber: 21
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/src/app/tournaments/page.tsx",
-                        lineNumber: 90,
+                        lineNumber: 91,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
@@ -117,13 +117,13 @@ function TournamentList() {
                         children: "Tournaments"
                     }, void 0, false, {
                         fileName: "[project]/src/app/tournaments/page.tsx",
-                        lineNumber: 95,
+                        lineNumber: 96,
                         columnNumber: 17
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/tournaments/page.tsx",
-                lineNumber: 89,
+                lineNumber: 90,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["motion"].div, {
@@ -147,12 +147,12 @@ function TournamentList() {
                                         children: tournament.name
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/tournaments/page.tsx",
-                                        lineNumber: 116,
+                                        lineNumber: 117,
                                         columnNumber: 37
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/tournaments/page.tsx",
-                                    lineNumber: 115,
+                                    lineNumber: 116,
                                     columnNumber: 33
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -160,7 +160,7 @@ function TournamentList() {
                                     children: tournament.description
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/tournaments/page.tsx",
-                                    lineNumber: 123,
+                                    lineNumber: 124,
                                     columnNumber: 33
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -170,7 +170,7 @@ function TournamentList() {
                                             children: "Start:"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/tournaments/page.tsx",
-                                            lineNumber: 125,
+                                            lineNumber: 126,
                                             columnNumber: 37
                                         }, this),
                                         " ",
@@ -180,7 +180,7 @@ function TournamentList() {
                                             children: " End:"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/tournaments/page.tsx",
-                                            lineNumber: 126,
+                                            lineNumber: 127,
                                             columnNumber: 37
                                         }, this),
                                         " ",
@@ -188,7 +188,7 @@ function TournamentList() {
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/tournaments/page.tsx",
-                                    lineNumber: 124,
+                                    lineNumber: 125,
                                     columnNumber: 33
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -198,7 +198,7 @@ function TournamentList() {
                                             children: "Type:"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/tournaments/page.tsx",
-                                            lineNumber: 128,
+                                            lineNumber: 129,
                                             columnNumber: 56
                                         }, this),
                                         " ",
@@ -206,7 +206,25 @@ function TournamentList() {
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/tournaments/page.tsx",
-                                    lineNumber: 128,
+                                    lineNumber: 129,
+                                    columnNumber: 33
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                    className: "text-sm",
+                                    children: [
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("strong", {
+                                            children: "Weapon Type:"
+                                        }, void 0, false, {
+                                            fileName: "[project]/src/app/tournaments/page.tsx",
+                                            lineNumber: 130,
+                                            columnNumber: 56
+                                        }, this),
+                                        " ",
+                                        tournament.weaponType || "Any"
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "[project]/src/app/tournaments/page.tsx",
+                                    lineNumber: 130,
                                     columnNumber: 33
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -216,7 +234,7 @@ function TournamentList() {
                                             children: "Rules:"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/tournaments/page.tsx",
-                                            lineNumber: 129,
+                                            lineNumber: 131,
                                             columnNumber: 56
                                         }, this),
                                         " ",
@@ -224,7 +242,7 @@ function TournamentList() {
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/tournaments/page.tsx",
-                                    lineNumber: 129,
+                                    lineNumber: 131,
                                     columnNumber: 33
                                 }, this),
                                 tournament.createdBy && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -235,7 +253,7 @@ function TournamentList() {
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/tournaments/page.tsx",
-                                    lineNumber: 131,
+                                    lineNumber: 133,
                                     columnNumber: 37
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -245,7 +263,7 @@ function TournamentList() {
                                             children: "Participants:"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/tournaments/page.tsx",
-                                            lineNumber: 136,
+                                            lineNumber: 138,
                                             columnNumber: 37
                                         }, this),
                                         " ",
@@ -253,7 +271,7 @@ function TournamentList() {
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/tournaments/page.tsx",
-                                    lineNumber: 135,
+                                    lineNumber: 137,
                                     columnNumber: 33
                                 }, this),
                                 user && !tournament.participants?.some((p)=>p.userId === user._id) && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -262,7 +280,7 @@ function TournamentList() {
                                     children: "Join Tournament"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/tournaments/page.tsx",
-                                    lineNumber: 140,
+                                    lineNumber: 142,
                                     columnNumber: 37
                                 }, this),
                                 user && tournament.participants?.some((p)=>p.userId === user._id) && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -270,35 +288,35 @@ function TournamentList() {
                                     children: "✔ You have joined this tournament"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/tournaments/page.tsx",
-                                    lineNumber: 149,
+                                    lineNumber: 151,
                                     columnNumber: 37
                                 }, this)
                             ]
                         }, tournament._id, true, {
                             fileName: "[project]/src/app/tournaments/page.tsx",
-                            lineNumber: 107,
+                            lineNumber: 108,
                             columnNumber: 29
                         }, this)) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                         children: "No tournaments available."
                     }, void 0, false, {
                         fileName: "[project]/src/app/tournaments/page.tsx",
-                        lineNumber: 154,
+                        lineNumber: 156,
                         columnNumber: 25
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/src/app/tournaments/page.tsx",
-                    lineNumber: 104,
+                    lineNumber: 105,
                     columnNumber: 17
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/app/tournaments/page.tsx",
-                lineNumber: 98,
+                lineNumber: 99,
                 columnNumber: 13
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/app/tournaments/page.tsx",
-        lineNumber: 88,
+        lineNumber: 89,
         columnNumber: 9
     }, this);
 }

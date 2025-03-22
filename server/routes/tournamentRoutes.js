@@ -6,7 +6,7 @@ const path = require("path");
 
 const router = express.Router();
 
-// ✅ Get All Tournaments (Anyone can access)
+// ✅ Get All Tournaments
 router.get("/", async (req, res) => {
     try {
         const tournaments = await Tournament.find().populate("createdBy", "username");
@@ -16,16 +16,15 @@ router.get("/", async (req, res) => {
     }
 });
 
-// ✅ Get Tournament by ID (Anyone can access)
+// ✅ Get Tournament by ID
 router.get("/:id", async (req, res) => {
     try {
         const tournament = await Tournament.findById(req.params.id)
-            .populate("participants.userId", "username") // If you're storing participant refs
+            .populate("participants.userId", "username")
             .populate("createdBy", "username");
 
         if (!tournament) return res.status(404).json({ message: "Tournament not found" });
 
-        // Optional: overwrite usernames if needed
         tournament.participants.forEach(p => {
             if (p.userId && p.userId.username) {
                 p.username = p.userId.username;
@@ -38,8 +37,7 @@ router.get("/:id", async (req, res) => {
     }
 });
 
-
-// ✅ Create a New Tournament (Creators & Admins)
+// ✅ Create a Tournament
 router.post("/", requireCreatorOrAdmin, async (req, res) => {
     try {
         if (!req.user || !req.user._id) {
@@ -53,6 +51,7 @@ router.post("/", requireCreatorOrAdmin, async (req, res) => {
 
         const tournament = new Tournament({
             ...req.body,
+            weaponType: req.body.weaponType || "Any", // <- ✅ support weaponType
             createdBy: req.user._id
         });
 
@@ -63,7 +62,7 @@ router.post("/", requireCreatorOrAdmin, async (req, res) => {
     }
 });
 
-// ✅ Player Joins Tournament
+// ✅ Join Tournament
 router.post("/:id/join", requireAuth, async (req, res) => {
     try {
         const tournament = await Tournament.findById(req.params.id);
@@ -84,34 +83,36 @@ router.post("/:id/join", requireAuth, async (req, res) => {
         });
 
         await tournament.save();
-
         res.json({ message: "Successfully joined tournament!", tournament });
     } catch (err) {
-        console.error("❌ Join Error:", err);
         res.status(500).json({ error: err.message });
     }
 });
 
-// ✅ Update Tournament (Only Admin or Creator)
+// ✅ Update Tournament
 router.put("/:id", requireAuth, async (req, res) => {
     try {
         const tournament = await Tournament.findById(req.params.id);
         if (!tournament) return res.status(404).json({ message: "Tournament not found" });
 
-        // ✅ Only allow tournament creator or admin to edit
         if (!req.user.roles.includes("admin") && req.user._id.toString() !== tournament.createdBy.toString()) {
-            return res.status(403).json({ message: "Access denied. Only admins or the tournament creator can edit." });
+            return res.status(403).json({ message: "Access denied." });
         }
 
-        // ✅ Update tournament
-        const updatedTournament = await Tournament.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        // ✅ Merge weaponType safely
+        const updatePayload = {
+            ...req.body,
+            weaponType: req.body.weaponType || tournament.weaponType || "Any"
+        };
+
+        const updatedTournament = await Tournament.findByIdAndUpdate(req.params.id, updatePayload, { new: true });
         res.json(updatedTournament);
     } catch (err) {
         res.status(400).json({ error: err.message });
     }
 });
 
-// ✅ Delete Tournament (Only Admins)
+// ✅ Delete Tournament
 router.delete("/:id", requireAdmin, async (req, res) => {
     try {
         const deletedTournament = await Tournament.findByIdAndDelete(req.params.id);
@@ -122,13 +123,10 @@ router.delete("/:id", requireAdmin, async (req, res) => {
     }
 });
 
+// ✅ File Upload Setup
 const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, "uploads/"); // Ensure this folder exists
-    },
-    filename: (req, file, cb) => {
-        cb(null, Date.now() + path.extname(file.originalname));
-    }
+    destination: (req, file, cb) => cb(null, "uploads/"),
+    filename: (req, file, cb) => cb(null, Date.now() + path.extname(file.originalname))
 });
 
 const upload = multer({ storage });
@@ -149,10 +147,8 @@ router.post("/:id/submit-score", requireAuth, upload.single("proof"), async (req
 
         res.json({ message: "Score submitted successfully!", tournament });
     } catch (err) {
-        console.error("❌ Score Submit Error:", err);
         res.status(500).json({ error: err.message });
     }
 });
-
 
 module.exports = router;

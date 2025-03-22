@@ -1,3 +1,5 @@
+// ✅ Updated TournamentForm.tsx
+
 "use client";
 
 import { useState, useEffect, useRef } from "react";
@@ -16,6 +18,7 @@ export default function TournamentForm() {
         startDate: "",
         endDate: "",
         type: "high-score",
+        weaponType: "Any",
         rules: ""
     });
     const [message, setMessage] = useState("");
@@ -24,7 +27,6 @@ export default function TournamentForm() {
     const startDateRef = useRef<HTMLInputElement>(null);
     const endDateRef = useRef<HTMLInputElement>(null);
 
-    // ✅ Initialize Flatpickr and bind to formData
     useEffect(() => {
         if (startDateRef.current) {
             flatpickr(startDateRef.current, {
@@ -59,18 +61,23 @@ export default function TournamentForm() {
         e.preventDefault();
         setMessage("");
 
-        console.log("Submitting Form Data:", formData); // ✅ Debugging
-
         try {
             await axios.post("http://localhost:5000/api/tournaments", formData, {
                 withCredentials: true,
                 headers: { "Content-Type": "application/json" }
             });
             setMessage("Tournament created successfully!");
-            setFormData({ name: "", description: "", startDate: "", endDate: "", type: "high-score", rules: "" });
+            setFormData({
+                name: "",
+                description: "",
+                startDate: "",
+                endDate: "",
+                type: "high-score",
+                weaponType: "Any",
+                rules: ""
+            });
             router.push("/tournaments");
         } catch (err: any) {
-            console.error("❌ Submission Error:", err.response?.data);
             setMessage("Error: " + (err.response?.data?.message || "Failed to create tournament."));
         }
     };
@@ -84,13 +91,11 @@ export default function TournamentForm() {
                 <TextAreaField label="Description" name="description" value={formData.description} onChange={handleChange} />
 
                 <div className="mb-4">
-                    {/* ✅ Start Date Input */}
                     <label className="text-gray-700 custom-date">Start Date</label>
                     <input ref={startDateRef} name="startDate" className="mt-1 p-2 border rounded w-full" readOnly />
                 </div>
 
                 <div className="mb-4">
-                    {/* ✅ End Date Input */}
                     <label className="text-gray-700 mt-4 custom-date">End Date</label>
                     <input ref={endDateRef} name="endDate" className="mt-1 p-2 border rounded w-full" readOnly />
                 </div>
@@ -100,8 +105,18 @@ export default function TournamentForm() {
                     name="type"
                     value={formData.type}
                     onChange={handleChange}
+                    options={[{ value: "high-score", label: "High Score" }]}
+                />
+
+                <SelectField
+                    label="Weapon Type"
+                    name="weaponType"
+                    value={formData.weaponType}
+                    onChange={handleChange}
                     options={[
-                        { value: "high-score", label: "High Score" }
+                        { value: "Bow", label: "Bow" },
+                        { value: "Crossbow", label: "Crossbow" },
+                        { value: "Any", label: "Any" }
                     ]}
                 />
 
