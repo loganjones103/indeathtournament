@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import UserDropdown from "../components/UserDropdown"; // ✅ Keep logic in UserDropdown
+import { AuthProvider } from "../context/AuthContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,18 +28,20 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        {/* ✅ Navbar */}
-        <nav className="flex justify-between items-center p-4 bg-gray-900 text-white">
-          <Link href="/" className="text-2xl font-bold">
-            In Death Tournament
-          </Link>
+        <AuthProvider>
+          {/* ✅ Navbar */}
+          <nav className="flex justify-between items-center p-4 bg-gray-900 text-white">
+            <Link href="/" className="text-2xl font-bold">
+              In Death Tournament
+            </Link>
 
-          {/* ✅ User Dropdown */}
-          <UserDropdown /> 
-        </nav>
+            {/* ✅ User Dropdown */}
+            <UserDropdown />
+          </nav>
 
-        {/* ✅ Page Content */}
-        <main className="p-6">{children}</main>
+          {/* ✅ Page Content */}
+          <main className="p-6">{children}</main>
+        </AuthProvider>
       </body>
     </html>
   );

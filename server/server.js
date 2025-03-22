@@ -5,6 +5,8 @@ const mongoose = require("mongoose");
 const session = require("express-session");
 const passport = require("passport");
 const path = require("path");
+const userRoutes = require("./routes/userRoutes");
+
 require("dotenv").config();
 
 require("./models/User");
@@ -69,6 +71,7 @@ app.use((req, res, next) => {
 // ✅ Routes
 app.use("/auth", authRoutes);
 app.use("/api/tournaments", tournamentRoutes);
+app.use("/api/users", userRoutes);
 
 app.get("/", (req, res) => {
     res.send("In Death Tournament Backend Running!");

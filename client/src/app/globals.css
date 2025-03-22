@@ -59,3 +59,33 @@ thead tr {
 .center-img {
   margin: 0 auto;
 }
+
+.create-form label {
+  color: rgba(56, 139, 253, 0.4);
+  font-size: 14px;
+}
+
+/* Background color for selected date */
+.flatpickr-day.selected,
+.flatpickr-day.selected:hover {
+    background: #161b22 !important; /* Your color */
+    border-color: #fff !important; /* Slightly darker border */
+    color: #fff !important; /* Ensures contrast */
+}
+
+/* Hover effect on dates */
+.flatpickr-day:hover {
+    background: #161b22 !important; /* Lighter hover effect */
+}
+
+/* Change input field styling */
+.flatpickr-input {
+    background-color: #161b22; /* Dark background */
+    color: #fff; /* White text */
+    border: 1px solid #fff; /* Subtle border */
+}
+
+/* Custom icon styling */
+.flatpickr-input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}

@@ -4,7 +4,7 @@ import TournamentForm from "../../components/TournamentForm";
 export default function CreateTournamentPage() {
     return (
         <AuthWrapper>
-            <div className="flex justify-center items-center min-h-screen bg-gray-100">
+            <div className="flex justify-center items-center min-h-screen">
                 <TournamentForm />
             </div>
         </AuthWrapper>

@@ -402,6 +402,10 @@
     right: calc(var(--spacing) * 0);
   }
 
+  .right-24 {
+    right: calc(var(--spacing) * 24);
+  }
+
   .bottom-0 {
     bottom: calc(var(--spacing) * 0);
   }
@@ -500,6 +504,26 @@
 
   .mt-6 {
     margin-top: calc(var(--spacing) * 6);
+  }
+
+  .mt-16 {
+    margin-top: calc(var(--spacing) * 16);
+  }
+
+  .mt-24 {
+    margin-top: calc(var(--spacing) * 24);
+  }
+
+  .mr-1 {
+    margin-right: calc(var(--spacing) * 1);
+  }
+
+  .mr-2 {
+    margin-right: calc(var(--spacing) * 2);
+  }
+
+  .mr-4 {
+    margin-right: calc(var(--spacing) * 4);
   }
 
   .mb-4 {
@@ -694,6 +718,11 @@
     border-width: 4px;
   }
 
+  .border-t {
+    border-top-style: var(--tw-border-style);
+    border-top-width: 1px;
+  }
+
   .border-b {
     border-bottom-style: var(--tw-border-style);
     border-bottom-width: 1px;
@@ -707,8 +736,16 @@
     border-color: var(--color-gray-300);
   }
 
+  .border-gray-400 {
+    border-color: var(--color-gray-400);
+  }
+
   .border-gray-500 {
     border-color: var(--color-gray-500);
+  }
+
+  .border-gray-600 {
+    border-color: var(--color-gray-600);
   }
 
   .border-gray-700 {
@@ -721,6 +758,10 @@
 
   .bg-\[\#0d1017\] {
     background-color: #0d1017;
+  }
+
+  .bg-\[\#161b22\] {
+    background-color: #161b22;
   }
 
   .bg-black {
@@ -775,8 +816,16 @@
     padding: calc(var(--spacing) * 6);
   }
 
+  .p-8 {
+    padding: calc(var(--spacing) * 8);
+  }
+
   .p-10 {
     padding: calc(var(--spacing) * 10);
+  }
+
+  .px-3 {
+    padding-inline: calc(var(--spacing) * 3);
   }
 
   .px-4 {
@@ -785,6 +834,10 @@
 
   .px-6 {
     padding-inline: calc(var(--spacing) * 6);
+  }
+
+  .py-1 {
+    padding-block: calc(var(--spacing) * 1);
   }
 
   .py-2 {
@@ -912,6 +965,11 @@
     font-style: italic;
   }
 
+  .ordinal {
+    --tw-ordinal: ordinal;
+    font-variant-numeric: var(--tw-ordinal, ) var(--tw-slashed-zero, ) var(--tw-numeric-figure, ) var(--tw-numeric-spacing, ) var(--tw-numeric-fraction, );
+  }
+
   .underline {
     text-decoration-line: underline;
   }
@@ -1027,6 +1085,12 @@
     --tw-outline-style: none;
     outline-style: none;
   }
+
+  @media (width >= 48rem) {
+    .md\:mt-24 {
+      margin-top: calc(var(--spacing) * 24);
+    }
+  }
 }
 
 :root {
@@ -1080,6 +1144,31 @@ thead tr {
 
 .center-img {
   margin: 0 auto;
+}
+
+.create-form label {
+  color: #388bfd66;
+  font-size: 14px;
+}
+
+.flatpickr-day.selected, .flatpickr-day.selected:hover {
+  background: #161b22 !important;
+  border-color: #fff !important;
+  color: #fff !important;
+}
+
+.flatpickr-day:hover {
+  background: #161b22 !important;
+}
+
+.flatpickr-input {
+  background-color: #161b22;
+  color: #fff;
+  border: 1px solid #fff;
+}
+
+.flatpickr-input::placeholder {
+  color: #ffffff80;
 }
 
 @property --tw-translate-x {
@@ -1137,6 +1226,31 @@ thead tr {
 }
 
 @property --tw-font-weight {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-ordinal {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-slashed-zero {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-numeric-figure {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-numeric-spacing {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-numeric-fraction {
   syntax: "*";
   inherits: false
 }

@@ -3,12 +3,13 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import axios from "axios";
+import Link from "next/link";
 
 interface User {
     _id: string;
     username: string;
     avatar: string;
-    role: string;
+    roles: string[];
 }
 
 export default function UserDropdown() {
@@ -16,9 +17,6 @@ export default function UserDropdown() {
     const [isOpen, setIsOpen] = useState(false);
     const dropdownRef = useRef<HTMLDivElement>(null);
 
-    console.log("✅ UserDropdown component rendered!");
-
-    // ✅ Fetch user data on mount
     useEffect(() => {
         axios
             .get("http://localhost:5000/auth/user", { withCredentials: true })
@@ -30,50 +28,40 @@ export default function UserDropdown() {
         try {
             await axios.get("http://localhost:5000/auth/logout", { withCredentials: true });
             setUser(null);
-            window.location.reload(); // ✅ Forces UI update
+            window.location.reload();
         } catch (error) {
             console.error("Logout failed:", error);
         }
     };
 
-
     const handleLogin = () => {
         window.location.href = "http://localhost:5000/auth/google";
     };
 
-    // ✅ Close dropdown when clicking outside
     useEffect(() => {
         function handleClickOutside(event: MouseEvent) {
-            console.log("🖱 Click detected on:", event.target);
-
             if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-                console.log("❌ Closing dropdown");
                 setIsOpen(false);
             }
         }
 
         document.addEventListener("mousedown", handleClickOutside);
-        return () => {
-            console.log("🚀 Removing event listener");
-            document.removeEventListener("mousedown", handleClickOutside);
-        };
+        return () => document.removeEventListener("mousedown", handleClickOutside);
     }, []);
 
     return (
         <div className="relative" ref={dropdownRef}>
             {user ? (
                 <button
-                    onClick={() => {
-                        console.log("🔄 Toggling dropdown:", !isOpen);
-                        setIsOpen((prev) => !prev);
-                    }}
+                    onClick={() => setIsOpen((prev) => !prev)}
                     className="focus:outline-none"
                 >
                     <img
-                        src={user.avatar}
+                        src={user.avatar.startsWith("http") ? user.avatar : `http://localhost:5000${user.avatar}`}
                         alt="User Avatar"
                         className="w-10 h-10 rounded-full cursor-pointer"
                     />
+
                 </button>
             ) : (
                 <button
@@ -84,7 +72,6 @@ export default function UserDropdown() {
                 </button>
             )}
 
-            {/* ✅ Dropdown Menu with Framer Motion Animation */}
             <AnimatePresence>
                 {isOpen && user && (
                     <motion.div
@@ -95,6 +82,15 @@ export default function UserDropdown() {
                         className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 z-50"
                     >
                         <p className="px-4 py-2 text-gray-700 font-semibold">{user.username}</p>
+
+                        {user.roles.includes("admin") && (
+                            <Link href="/admin/users">
+                                <p className="px-4 py-2 text-blue-600 hover:bg-gray-100 cursor-pointer">
+                                    Manage Users
+                                </p>
+                            </Link>
+                        )}
+
                         <button
                             onClick={handleLogout}
                             className="w-full text-left px-4 py-2 text-red-500 hover:bg-gray-100"

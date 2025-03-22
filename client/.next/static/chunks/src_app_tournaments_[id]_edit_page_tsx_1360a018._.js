@@ -20,8 +20,9 @@ var _s = __turbopack_context__.k.signature();
 ;
 function EditTournament() {
     _s();
-    const { id } = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useParams"])();
+    const params = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useParams"])(); // ✅ Fetch dynamic ID
     const router = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRouter"])();
+    const id = params.id; // Ensure it's a string
     const [tournament, setTournament] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
     const [user, setUser] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
     const [loading, setLoading] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(true);
@@ -31,7 +32,7 @@ function EditTournament() {
         description: "",
         startDate: "",
         endDate: "",
-        type: "",
+        type: "high-score",
         rules: ""
     });
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
@@ -89,7 +90,7 @@ function EditTournament() {
         children: "Loading tournament..."
     }, void 0, false, {
         fileName: "[project]/src/app/tournaments/[id]/edit/page.tsx",
-        lineNumber: 74,
+        lineNumber: 65,
         columnNumber: 25
     }, this);
     if (error) return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -97,42 +98,42 @@ function EditTournament() {
         children: error
     }, void 0, false, {
         fileName: "[project]/src/app/tournaments/[id]/edit/page.tsx",
-        lineNumber: 75,
+        lineNumber: 66,
         columnNumber: 23
     }, this);
     if (!tournament) return null;
     // ✅ Restrict Editing to Admins or the Tournament Creator
-    if (!user || !tournament?.createdBy || user._id !== tournament.createdBy._id && user.role !== "admin") {
+    if (!user || !tournament?.createdBy || !user.roles.includes("admin") && user._id !== tournament.createdBy._id) {
         return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
             className: "text-red-500",
             children: "Access denied. You cannot edit this tournament."
         }, void 0, false, {
             fileName: "[project]/src/app/tournaments/[id]/edit/page.tsx",
-            lineNumber: 80,
+            lineNumber: 71,
             columnNumber: 16
         }, this);
     }
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("main", {
-        className: "flex flex-col items-center p-10",
+        className: "flex flex-col items-center p-10 bg-[#0d1017] min-h-screen",
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
-                className: "text-3xl font-bold",
+                className: "text-3xl font-bold text-white",
                 children: "Edit Tournament"
             }, void 0, false, {
                 fileName: "[project]/src/app/tournaments/[id]/edit/page.tsx",
-                lineNumber: 85,
+                lineNumber: 76,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
-                className: "w-full max-w-lg",
+                className: "w-full max-w-lg bg-[#161b22] p-6 shadow-lg rounded-lg border border-gray-700",
                 onSubmit: handleSubmit,
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                        className: "block",
+                        className: "text-white block",
                         children: "Name:"
                     }, void 0, false, {
                         fileName: "[project]/src/app/tournaments/[id]/edit/page.tsx",
-                        lineNumber: 87,
+                        lineNumber: 78,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -140,38 +141,38 @@ function EditTournament() {
                         name: "name",
                         value: formData.name,
                         onChange: handleChange,
-                        className: "border p-2 w-full",
+                        className: "border p-2 w-full bg-[#0d1017] text-white",
                         required: true
                     }, void 0, false, {
                         fileName: "[project]/src/app/tournaments/[id]/edit/page.tsx",
-                        lineNumber: 88,
+                        lineNumber: 79,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                        className: "block mt-2",
+                        className: "text-white block mt-2",
                         children: "Description:"
                     }, void 0, false, {
                         fileName: "[project]/src/app/tournaments/[id]/edit/page.tsx",
-                        lineNumber: 90,
+                        lineNumber: 81,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
                         name: "description",
                         value: formData.description,
                         onChange: handleChange,
-                        className: "border p-2 w-full",
+                        className: "border p-2 w-full bg-[#0d1017] text-white",
                         required: true
                     }, void 0, false, {
                         fileName: "[project]/src/app/tournaments/[id]/edit/page.tsx",
-                        lineNumber: 91,
+                        lineNumber: 82,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                        className: "block mt-2",
+                        className: "text-white block mt-2",
                         children: "Start Date:"
                     }, void 0, false, {
                         fileName: "[project]/src/app/tournaments/[id]/edit/page.tsx",
-                        lineNumber: 93,
+                        lineNumber: 84,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -179,19 +180,19 @@ function EditTournament() {
                         name: "startDate",
                         value: formData.startDate,
                         onChange: handleChange,
-                        className: "border p-2 w-full",
+                        className: "border p-2 w-full bg-[#0d1017] text-white",
                         required: true
                     }, void 0, false, {
                         fileName: "[project]/src/app/tournaments/[id]/edit/page.tsx",
-                        lineNumber: 94,
+                        lineNumber: 85,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                        className: "block mt-2",
+                        className: "text-white block mt-2",
                         children: "End Date:"
                     }, void 0, false, {
                         fileName: "[project]/src/app/tournaments/[id]/edit/page.tsx",
-                        lineNumber: 96,
+                        lineNumber: 87,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -199,75 +200,91 @@ function EditTournament() {
                         name: "endDate",
                         value: formData.endDate,
                         onChange: handleChange,
-                        className: "border p-2 w-full",
+                        className: "border p-2 w-full bg-[#0d1017] text-white",
                         required: true
                     }, void 0, false, {
                         fileName: "[project]/src/app/tournaments/[id]/edit/page.tsx",
-                        lineNumber: 97,
+                        lineNumber: 88,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                        className: "block mt-2",
+                        className: "text-white block mt-2",
                         children: "Type:"
                     }, void 0, false, {
                         fileName: "[project]/src/app/tournaments/[id]/edit/page.tsx",
-                        lineNumber: 99,
+                        lineNumber: 90,
                         columnNumber: 17
                     }, this),
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
-                        type: "text",
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
                         name: "type",
                         value: formData.type,
                         onChange: handleChange,
-                        className: "border p-2 w-full",
-                        required: true
-                    }, void 0, false, {
+                        className: "border p-2 w-full bg-[#0d1017] text-white",
+                        children: [
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
+                                value: "high-score",
+                                children: "High Score"
+                            }, void 0, false, {
+                                fileName: "[project]/src/app/tournaments/[id]/edit/page.tsx",
+                                lineNumber: 92,
+                                columnNumber: 21
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
+                                value: "elimination",
+                                children: "Elimination"
+                            }, void 0, false, {
+                                fileName: "[project]/src/app/tournaments/[id]/edit/page.tsx",
+                                lineNumber: 93,
+                                columnNumber: 21
+                            }, this)
+                        ]
+                    }, void 0, true, {
                         fileName: "[project]/src/app/tournaments/[id]/edit/page.tsx",
-                        lineNumber: 100,
+                        lineNumber: 91,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                        className: "block mt-2",
+                        className: "text-white block mt-2",
                         children: "Rules:"
                     }, void 0, false, {
                         fileName: "[project]/src/app/tournaments/[id]/edit/page.tsx",
-                        lineNumber: 102,
+                        lineNumber: 96,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
                         name: "rules",
                         value: formData.rules,
                         onChange: handleChange,
-                        className: "border p-2 w-full",
+                        className: "border p-2 w-full bg-[#0d1017] text-white",
                         required: true
                     }, void 0, false, {
                         fileName: "[project]/src/app/tournaments/[id]/edit/page.tsx",
-                        lineNumber: 103,
+                        lineNumber: 97,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                         type: "submit",
-                        className: "mt-4 px-4 py-2 bg-blue-500 text-white rounded",
+                        className: "mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600",
                         children: "Update Tournament"
                     }, void 0, false, {
                         fileName: "[project]/src/app/tournaments/[id]/edit/page.tsx",
-                        lineNumber: 105,
+                        lineNumber: 99,
                         columnNumber: 17
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/tournaments/[id]/edit/page.tsx",
-                lineNumber: 86,
+                lineNumber: 77,
                 columnNumber: 13
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/app/tournaments/[id]/edit/page.tsx",
-        lineNumber: 84,
+        lineNumber: 75,
         columnNumber: 9
     }, this);
 }
-_s(EditTournament, "Cfa06D8nlxyF/FuYYXz0wWyNW54=", false, function() {
+_s(EditTournament, "M6BfVJiCA6/JyvpQSVYJA33g/sQ=", false, function() {
     return [
         __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useParams"],
         __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRouter"]

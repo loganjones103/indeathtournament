@@ -1,10 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
+import { useRouter } from "next/navigation";
 import axios from "axios";
 import InputField from "./InputField";
 import SelectField from "./SelectField";
 import TextAreaField from "./TextAreaField";
+import flatpickr from "flatpickr";
+import "flatpickr/dist/flatpickr.min.css";
 
 export default function TournamentForm() {
     const [formData, setFormData] = useState({
@@ -16,6 +19,37 @@ export default function TournamentForm() {
         rules: ""
     });
     const [message, setMessage] = useState("");
+    const router = useRouter();
+
+    const startDateRef = useRef<HTMLInputElement>(null);
+    const endDateRef = useRef<HTMLInputElement>(null);
+
+    // ✅ Initialize Flatpickr and bind to formData
+    useEffect(() => {
+        if (startDateRef.current) {
+            flatpickr(startDateRef.current, {
+                dateFormat: "Y-m-d",
+                allowInput: true,
+                onChange: (selectedDates) => {
+                    if (selectedDates.length > 0) {
+                        setFormData((prev) => ({ ...prev, startDate: selectedDates[0].toISOString().split("T")[0] }));
+                    }
+                },
+            });
+        }
+
+        if (endDateRef.current) {
+            flatpickr(endDateRef.current, {
+                dateFormat: "Y-m-d",
+                allowInput: true,
+                onChange: (selectedDates) => {
+                    if (selectedDates.length > 0) {
+                        setFormData((prev) => ({ ...prev, endDate: selectedDates[0].toISOString().split("T")[0] }));
+                    }
+                },
+            });
+        }
+    }, []);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -25,6 +59,8 @@ export default function TournamentForm() {
         e.preventDefault();
         setMessage("");
 
+        console.log("Submitting Form Data:", formData); // ✅ Debugging
+
         try {
             await axios.post("http://localhost:5000/api/tournaments", formData, {
                 withCredentials: true,
@@ -32,36 +68,51 @@ export default function TournamentForm() {
             });
             setMessage("Tournament created successfully!");
             setFormData({ name: "", description: "", startDate: "", endDate: "", type: "high-score", rules: "" });
+            router.push("/tournaments");
         } catch (err: any) {
-            setMessage("Error: " + err.response?.data?.message || "Failed to create tournament.");
+            console.error("❌ Submission Error:", err.response?.data);
+            setMessage("Error: " + (err.response?.data?.message || "Failed to create tournament."));
         }
     };
 
     return (
-        <form onSubmit={handleSubmit} className="max-w-lg mx-auto p-6 bg-white shadow-md rounded">
-            <h2 className="text-2xl font-bold mb-4">Create a Tournament</h2>
+        <div className="min-h-screen flex items-center justify-center bg-[#0d1017]">
+            <form onSubmit={handleSubmit} className="w-full max-w-lg p-8 bg-[#161b22] shadow-lg rounded-lg border border-gray-700 create-form">
+                <h2 className="text-3xl font-bold text-white text-center mb-6">Create a Tournament</h2>
 
-            <InputField label="Tournament Name" name="name" value={formData.name} onChange={handleChange} />
-            <TextAreaField label="Description" name="description" value={formData.description} onChange={handleChange} />
-            <InputField label="Start Date" name="startDate" type="date" value={formData.startDate} onChange={handleChange} />
-            <InputField label="End Date" name="endDate" type="date" value={formData.endDate} onChange={handleChange} />
+                <InputField label="Tournament Name" name="name" value={formData.name} onChange={handleChange} />
+                <TextAreaField label="Description" name="description" value={formData.description} onChange={handleChange} />
 
-            <SelectField
-                label="Tournament Type"
-                name="type"
-                value={formData.type}
-                onChange={handleChange}
-                options={[
-                    { value: "high-score", label: "High Score" },
-                    { value: "elimination", label: "Elimination" }
-                ]}
-            />
+                <div className="mb-4">
+                    {/* ✅ Start Date Input */}
+                    <label className="text-gray-700 custom-date">Start Date</label>
+                    <input ref={startDateRef} name="startDate" className="mt-1 p-2 border rounded w-full" readOnly />
+                </div>
 
-            <TextAreaField label="Rules" name="rules" value={formData.rules} onChange={handleChange} />
+                <div className="mb-4">
+                    {/* ✅ End Date Input */}
+                    <label className="text-gray-700 mt-4 custom-date">End Date</label>
+                    <input ref={endDateRef} name="endDate" className="mt-1 p-2 border rounded w-full" readOnly />
+                </div>
 
-            <button type="submit" className="w-full bg-blue-500 text-white py-2 rounded">Create Tournament</button>
-            
-            {message && <p className="mt-4 text-center">{message}</p>}
-        </form>
+                <SelectField
+                    label="Tournament Type"
+                    name="type"
+                    value={formData.type}
+                    onChange={handleChange}
+                    options={[
+                        { value: "high-score", label: "High Score" }
+                    ]}
+                />
+
+                <TextAreaField label="Rules" name="rules" value={formData.rules} onChange={handleChange} />
+
+                <button type="submit" className="w-full mt-4 py-2 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-600 transition">
+                    Create Tournament
+                </button>
+
+                {message && <p className="mt-4 text-center text-white">{message}</p>}
+            </form>
+        </div>
     );
 }

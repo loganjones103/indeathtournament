@@ -31,7 +31,7 @@ function AuthWrapper({ children }) {
                         const res = await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].get("http://localhost:5000/auth/user", {
                             withCredentials: true
                         });
-                        if (res.data.role === "admin") {
+                        if (res.data.roles.includes("admin") || res.data.roles.includes("creator")) {
                             setUser(res.data);
                         } else {
                             router.push("/"); // Redirect non-admins
@@ -227,13 +227,18 @@ __turbopack_context__.s({
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/jsx-dev-runtime.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/navigation.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/axios/lib/axios.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$InputField$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/components/InputField.tsx [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$SelectField$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/components/SelectField.tsx [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$TextAreaField$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/components/TextAreaField.tsx [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$flatpickr$2f$dist$2f$esm$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/flatpickr/dist/esm/index.js [app-client] (ecmascript)");
 ;
 var _s = __turbopack_context__.k.signature();
 "use client";
+;
+;
+;
 ;
 ;
 ;
@@ -250,6 +255,50 @@ function TournamentForm() {
         rules: ""
     });
     const [message, setMessage] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("");
+    const router = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRouter"])();
+    const startDateRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(null);
+    const endDateRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(null);
+    // ✅ Initialize Flatpickr and bind to formData
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
+        "TournamentForm.useEffect": ()=>{
+            if (startDateRef.current) {
+                (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$flatpickr$2f$dist$2f$esm$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"])(startDateRef.current, {
+                    dateFormat: "Y-m-d",
+                    allowInput: true,
+                    onChange: {
+                        "TournamentForm.useEffect": (selectedDates)=>{
+                            if (selectedDates.length > 0) {
+                                setFormData({
+                                    "TournamentForm.useEffect": (prev)=>({
+                                            ...prev,
+                                            startDate: selectedDates[0].toISOString().split("T")[0]
+                                        })
+                                }["TournamentForm.useEffect"]);
+                            }
+                        }
+                    }["TournamentForm.useEffect"]
+                });
+            }
+            if (endDateRef.current) {
+                (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$flatpickr$2f$dist$2f$esm$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"])(endDateRef.current, {
+                    dateFormat: "Y-m-d",
+                    allowInput: true,
+                    onChange: {
+                        "TournamentForm.useEffect": (selectedDates)=>{
+                            if (selectedDates.length > 0) {
+                                setFormData({
+                                    "TournamentForm.useEffect": (prev)=>({
+                                            ...prev,
+                                            endDate: selectedDates[0].toISOString().split("T")[0]
+                                        })
+                                }["TournamentForm.useEffect"]);
+                            }
+                        }
+                    }["TournamentForm.useEffect"]
+                });
+            }
+        }
+    }["TournamentForm.useEffect"], []);
     const handleChange = (e)=>{
         setFormData({
             ...formData,
@@ -259,6 +308,7 @@ function TournamentForm() {
     const handleSubmit = async (e)=>{
         e.preventDefault();
         setMessage("");
+        console.log("Submitting Form Data:", formData); // ✅ Debugging
         try {
             await __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].post("http://localhost:5000/api/tournaments", formData, {
                 withCredentials: true,
@@ -275,119 +325,160 @@ function TournamentForm() {
                 type: "high-score",
                 rules: ""
             });
+            router.push("/tournaments");
         } catch (err) {
-            setMessage("Error: " + err.response?.data?.message || "Failed to create tournament.");
+            console.error("❌ Submission Error:", err.response?.data);
+            setMessage("Error: " + (err.response?.data?.message || "Failed to create tournament."));
         }
     };
-    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
-        onSubmit: handleSubmit,
-        className: "max-w-lg mx-auto p-6 bg-white shadow-md rounded",
-        children: [
-            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
-                className: "text-2xl font-bold mb-4",
-                children: "Create a Tournament"
-            }, void 0, false, {
-                fileName: "[project]/src/components/TournamentForm.tsx",
-                lineNumber: 42,
-                columnNumber: 13
-            }, this),
-            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$InputField$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
-                label: "Tournament Name",
-                name: "name",
-                value: formData.name,
-                onChange: handleChange
-            }, void 0, false, {
-                fileName: "[project]/src/components/TournamentForm.tsx",
-                lineNumber: 44,
-                columnNumber: 13
-            }, this),
-            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$TextAreaField$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
-                label: "Description",
-                name: "description",
-                value: formData.description,
-                onChange: handleChange
-            }, void 0, false, {
-                fileName: "[project]/src/components/TournamentForm.tsx",
-                lineNumber: 45,
-                columnNumber: 13
-            }, this),
-            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$InputField$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
-                label: "Start Date",
-                name: "startDate",
-                type: "date",
-                value: formData.startDate,
-                onChange: handleChange
-            }, void 0, false, {
-                fileName: "[project]/src/components/TournamentForm.tsx",
-                lineNumber: 46,
-                columnNumber: 13
-            }, this),
-            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$InputField$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
-                label: "End Date",
-                name: "endDate",
-                type: "date",
-                value: formData.endDate,
-                onChange: handleChange
-            }, void 0, false, {
-                fileName: "[project]/src/components/TournamentForm.tsx",
-                lineNumber: 47,
-                columnNumber: 13
-            }, this),
-            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$SelectField$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
-                label: "Tournament Type",
-                name: "type",
-                value: formData.type,
-                onChange: handleChange,
-                options: [
-                    {
-                        value: "high-score",
-                        label: "High Score"
-                    },
-                    {
-                        value: "elimination",
-                        label: "Elimination"
-                    }
-                ]
-            }, void 0, false, {
-                fileName: "[project]/src/components/TournamentForm.tsx",
-                lineNumber: 49,
-                columnNumber: 13
-            }, this),
-            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$TextAreaField$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
-                label: "Rules",
-                name: "rules",
-                value: formData.rules,
-                onChange: handleChange
-            }, void 0, false, {
-                fileName: "[project]/src/components/TournamentForm.tsx",
-                lineNumber: 60,
-                columnNumber: 13
-            }, this),
-            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                type: "submit",
-                className: "w-full bg-blue-500 text-white py-2 rounded",
-                children: "Create Tournament"
-            }, void 0, false, {
-                fileName: "[project]/src/components/TournamentForm.tsx",
-                lineNumber: 62,
-                columnNumber: 13
-            }, this),
-            message && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                className: "mt-4 text-center",
-                children: message
-            }, void 0, false, {
-                fileName: "[project]/src/components/TournamentForm.tsx",
-                lineNumber: 64,
-                columnNumber: 25
-            }, this)
-        ]
-    }, void 0, true, {
+    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+        className: "min-h-screen flex items-center justify-center bg-[#0d1017]",
+        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
+            onSubmit: handleSubmit,
+            className: "w-full max-w-lg p-8 bg-[#161b22] shadow-lg rounded-lg border border-gray-700 create-form",
+            children: [
+                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
+                    className: "text-3xl font-bold text-white text-center mb-6",
+                    children: "Create a Tournament"
+                }, void 0, false, {
+                    fileName: "[project]/src/components/TournamentForm.tsx",
+                    lineNumber: 81,
+                    columnNumber: 17
+                }, this),
+                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$InputField$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
+                    label: "Tournament Name",
+                    name: "name",
+                    value: formData.name,
+                    onChange: handleChange
+                }, void 0, false, {
+                    fileName: "[project]/src/components/TournamentForm.tsx",
+                    lineNumber: 83,
+                    columnNumber: 17
+                }, this),
+                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$TextAreaField$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
+                    label: "Description",
+                    name: "description",
+                    value: formData.description,
+                    onChange: handleChange
+                }, void 0, false, {
+                    fileName: "[project]/src/components/TournamentForm.tsx",
+                    lineNumber: 84,
+                    columnNumber: 17
+                }, this),
+                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                    className: "mb-4",
+                    children: [
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
+                            className: "text-gray-700 custom-date",
+                            children: "Start Date"
+                        }, void 0, false, {
+                            fileName: "[project]/src/components/TournamentForm.tsx",
+                            lineNumber: 88,
+                            columnNumber: 21
+                        }, this),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                            ref: startDateRef,
+                            name: "startDate",
+                            className: "mt-1 p-2 border rounded w-full",
+                            readOnly: true
+                        }, void 0, false, {
+                            fileName: "[project]/src/components/TournamentForm.tsx",
+                            lineNumber: 89,
+                            columnNumber: 21
+                        }, this)
+                    ]
+                }, void 0, true, {
+                    fileName: "[project]/src/components/TournamentForm.tsx",
+                    lineNumber: 86,
+                    columnNumber: 17
+                }, this),
+                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                    className: "mb-4",
+                    children: [
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
+                            className: "text-gray-700 mt-4 custom-date",
+                            children: "End Date"
+                        }, void 0, false, {
+                            fileName: "[project]/src/components/TournamentForm.tsx",
+                            lineNumber: 94,
+                            columnNumber: 21
+                        }, this),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
+                            ref: endDateRef,
+                            name: "endDate",
+                            className: "mt-1 p-2 border rounded w-full",
+                            readOnly: true
+                        }, void 0, false, {
+                            fileName: "[project]/src/components/TournamentForm.tsx",
+                            lineNumber: 95,
+                            columnNumber: 21
+                        }, this)
+                    ]
+                }, void 0, true, {
+                    fileName: "[project]/src/components/TournamentForm.tsx",
+                    lineNumber: 92,
+                    columnNumber: 17
+                }, this),
+                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$SelectField$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
+                    label: "Tournament Type",
+                    name: "type",
+                    value: formData.type,
+                    onChange: handleChange,
+                    options: [
+                        {
+                            value: "high-score",
+                            label: "High Score"
+                        }
+                    ]
+                }, void 0, false, {
+                    fileName: "[project]/src/components/TournamentForm.tsx",
+                    lineNumber: 98,
+                    columnNumber: 17
+                }, this),
+                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$TextAreaField$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
+                    label: "Rules",
+                    name: "rules",
+                    value: formData.rules,
+                    onChange: handleChange
+                }, void 0, false, {
+                    fileName: "[project]/src/components/TournamentForm.tsx",
+                    lineNumber: 108,
+                    columnNumber: 17
+                }, this),
+                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                    type: "submit",
+                    className: "w-full mt-4 py-2 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-600 transition",
+                    children: "Create Tournament"
+                }, void 0, false, {
+                    fileName: "[project]/src/components/TournamentForm.tsx",
+                    lineNumber: 110,
+                    columnNumber: 17
+                }, this),
+                message && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                    className: "mt-4 text-center text-white",
+                    children: message
+                }, void 0, false, {
+                    fileName: "[project]/src/components/TournamentForm.tsx",
+                    lineNumber: 114,
+                    columnNumber: 29
+                }, this)
+            ]
+        }, void 0, true, {
+            fileName: "[project]/src/components/TournamentForm.tsx",
+            lineNumber: 80,
+            columnNumber: 13
+        }, this)
+    }, void 0, false, {
         fileName: "[project]/src/components/TournamentForm.tsx",
-        lineNumber: 41,
+        lineNumber: 79,
         columnNumber: 9
     }, this);
 }
-_s(TournamentForm, "rmc736DxZ+acdpFnETPiBmcrUnI=");
+_s(TournamentForm, "GSEc/uVClOhQMmXykKxKQWy/hRM=", false, function() {
+    return [
+        __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRouter"]
+    ];
+});
 _c = TournamentForm;
 var _c;
 __turbopack_context__.k.register(_c, "TournamentForm");

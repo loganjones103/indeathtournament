@@ -12,9 +12,12 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/axios/lib/axios.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/client/app-dir/link.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/framer-motion/dist/es/render/components/motion/proxy.mjs [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$components$2f$AnimatePresence$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/framer-motion/dist/es/components/AnimatePresence/index.mjs [app-client] (ecmascript)");
 ;
 var _s = __turbopack_context__.k.signature();
 "use client";
+;
 ;
 ;
 ;
@@ -24,6 +27,27 @@ function TournamentList() {
     const [loading, setLoading] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(true);
     const [error, setError] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("");
     const [user, setUser] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
+    const listVariants = {
+        hidden: {
+            opacity: 0
+        },
+        show: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.1
+            }
+        }
+    };
+    const itemVariants = {
+        hidden: {
+            opacity: 0,
+            y: 20
+        },
+        show: {
+            opacity: 1,
+            y: 0
+        }
+    };
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
         "TournamentList.useEffect": ()=>{
             __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].get("http://localhost:5000/api/tournaments").then({
@@ -70,7 +94,7 @@ function TournamentList() {
         children: "Loading tournaments..."
     }, void 0, false, {
         fileName: "[project]/src/app/tournaments/page.tsx",
-        lineNumber: 68,
+        lineNumber: 84,
         columnNumber: 25
     }, this);
     if (error) return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -78,7 +102,7 @@ function TournamentList() {
         children: error
     }, void 0, false, {
         fileName: "[project]/src/app/tournaments/page.tsx",
-        lineNumber: 69,
+        lineNumber: 85,
         columnNumber: 23
     }, this);
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("main", {
@@ -94,12 +118,12 @@ function TournamentList() {
                             children: "Back"
                         }, void 0, false, {
                             fileName: "[project]/src/app/tournaments/page.tsx",
-                            lineNumber: 75,
+                            lineNumber: 91,
                             columnNumber: 21
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/src/app/tournaments/page.tsx",
-                        lineNumber: 74,
+                        lineNumber: 90,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
@@ -107,175 +131,188 @@ function TournamentList() {
                         children: "Tournaments"
                     }, void 0, false, {
                         fileName: "[project]/src/app/tournaments/page.tsx",
-                        lineNumber: 79,
+                        lineNumber: 95,
                         columnNumber: 17
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/tournaments/page.tsx",
-                lineNumber: 73,
+                lineNumber: 89,
                 columnNumber: 13
             }, this),
-            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["motion"].div, {
                 className: "w-full max-w-3xl",
-                children: tournaments.length > 0 ? tournaments.map((tournament)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "p-4 mb-4 border rounded shadow blue-border",
-                        children: [
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
-                                className: "text-xl font-bold",
-                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
-                                    href: `/tournaments/${tournament._id}`,
-                                    className: "text-blue-500 underline",
-                                    children: tournament.name
+                variants: listVariants,
+                initial: "hidden",
+                animate: "show",
+                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$components$2f$AnimatePresence$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["AnimatePresence"], {
+                    children: tournaments.length > 0 ? tournaments.map((tournament)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["motion"].div, {
+                            className: "p-4 mb-4 border rounded shadow blue-border",
+                            variants: itemVariants,
+                            initial: "hidden",
+                            animate: "show",
+                            exit: "hidden",
+                            children: [
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
+                                    className: "text-xl font-bold",
+                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
+                                        href: `/tournaments/${tournament._id}`,
+                                        className: "text-blue-500 underline",
+                                        children: tournament.name
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/app/tournaments/page.tsx",
+                                        lineNumber: 116,
+                                        columnNumber: 37
+                                    }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/tournaments/page.tsx",
-                                    lineNumber: 87,
+                                    lineNumber: 115,
                                     columnNumber: 33
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                    className: "text-gray-600",
+                                    children: tournament.description
+                                }, void 0, false, {
+                                    fileName: "[project]/src/app/tournaments/page.tsx",
+                                    lineNumber: 123,
+                                    columnNumber: 33
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                    className: "text-sm",
+                                    children: [
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("strong", {
+                                            children: "Start:"
+                                        }, void 0, false, {
+                                            fileName: "[project]/src/app/tournaments/page.tsx",
+                                            lineNumber: 125,
+                                            columnNumber: 37
+                                        }, this),
+                                        " ",
+                                        new Date(tournament.startDate).toLocaleDateString(),
+                                        " |",
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("strong", {
+                                            children: " End:"
+                                        }, void 0, false, {
+                                            fileName: "[project]/src/app/tournaments/page.tsx",
+                                            lineNumber: 126,
+                                            columnNumber: 37
+                                        }, this),
+                                        " ",
+                                        new Date(tournament.endDate).toLocaleDateString()
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "[project]/src/app/tournaments/page.tsx",
+                                    lineNumber: 124,
+                                    columnNumber: 33
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                    className: "text-sm",
+                                    children: [
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("strong", {
+                                            children: "Type:"
+                                        }, void 0, false, {
+                                            fileName: "[project]/src/app/tournaments/page.tsx",
+                                            lineNumber: 128,
+                                            columnNumber: 56
+                                        }, this),
+                                        " ",
+                                        tournament.type
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "[project]/src/app/tournaments/page.tsx",
+                                    lineNumber: 128,
+                                    columnNumber: 33
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                    className: "text-sm",
+                                    children: [
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("strong", {
+                                            children: "Rules:"
+                                        }, void 0, false, {
+                                            fileName: "[project]/src/app/tournaments/page.tsx",
+                                            lineNumber: 129,
+                                            columnNumber: 56
+                                        }, this),
+                                        " ",
+                                        tournament.rules
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "[project]/src/app/tournaments/page.tsx",
+                                    lineNumber: 129,
+                                    columnNumber: 33
+                                }, this),
+                                tournament.createdBy && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                    className: "text-sm text-gray-500",
+                                    children: [
+                                        "Created by: ",
+                                        tournament.createdBy.username
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "[project]/src/app/tournaments/page.tsx",
+                                    lineNumber: 131,
+                                    columnNumber: 37
+                                }, this),
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                    className: "text-sm",
+                                    children: [
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("strong", {
+                                            children: "Participants:"
+                                        }, void 0, false, {
+                                            fileName: "[project]/src/app/tournaments/page.tsx",
+                                            lineNumber: 136,
+                                            columnNumber: 37
+                                        }, this),
+                                        " ",
+                                        tournament.participants?.length || 0
+                                    ]
+                                }, void 0, true, {
+                                    fileName: "[project]/src/app/tournaments/page.tsx",
+                                    lineNumber: 135,
+                                    columnNumber: 33
+                                }, this),
+                                user && !tournament.participants?.some((p)=>p.userId === user._id) && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                    onClick: ()=>handleJoin(tournament._id),
+                                    className: "mt-2 px-4 py-2 bg-green-500 text-white rounded",
+                                    children: "Join Tournament"
+                                }, void 0, false, {
+                                    fileName: "[project]/src/app/tournaments/page.tsx",
+                                    lineNumber: 140,
+                                    columnNumber: 37
+                                }, this),
+                                user && tournament.participants?.some((p)=>p.userId === user._id) && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                    className: "text-green-500 mt-2",
+                                    children: "✔ You have joined this tournament"
+                                }, void 0, false, {
+                                    fileName: "[project]/src/app/tournaments/page.tsx",
+                                    lineNumber: 149,
+                                    columnNumber: 37
                                 }, this)
-                            }, void 0, false, {
-                                fileName: "[project]/src/app/tournaments/page.tsx",
-                                lineNumber: 86,
-                                columnNumber: 29
-                            }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                className: "text-gray-600",
-                                children: tournament.description
-                            }, void 0, false, {
-                                fileName: "[project]/src/app/tournaments/page.tsx",
-                                lineNumber: 94,
-                                columnNumber: 29
-                            }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                className: "text-sm",
-                                children: [
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("strong", {
-                                        children: "Start:"
-                                    }, void 0, false, {
-                                        fileName: "[project]/src/app/tournaments/page.tsx",
-                                        lineNumber: 96,
-                                        columnNumber: 33
-                                    }, this),
-                                    " ",
-                                    new Date(tournament.startDate).toLocaleDateString(),
-                                    " |",
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("strong", {
-                                        children: " End:"
-                                    }, void 0, false, {
-                                        fileName: "[project]/src/app/tournaments/page.tsx",
-                                        lineNumber: 97,
-                                        columnNumber: 33
-                                    }, this),
-                                    " ",
-                                    new Date(tournament.endDate).toLocaleDateString()
-                                ]
-                            }, void 0, true, {
-                                fileName: "[project]/src/app/tournaments/page.tsx",
-                                lineNumber: 95,
-                                columnNumber: 29
-                            }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                className: "text-sm",
-                                children: [
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("strong", {
-                                        children: "Type:"
-                                    }, void 0, false, {
-                                        fileName: "[project]/src/app/tournaments/page.tsx",
-                                        lineNumber: 99,
-                                        columnNumber: 52
-                                    }, this),
-                                    " ",
-                                    tournament.type
-                                ]
-                            }, void 0, true, {
-                                fileName: "[project]/src/app/tournaments/page.tsx",
-                                lineNumber: 99,
-                                columnNumber: 29
-                            }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                className: "text-sm",
-                                children: [
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("strong", {
-                                        children: "Rules:"
-                                    }, void 0, false, {
-                                        fileName: "[project]/src/app/tournaments/page.tsx",
-                                        lineNumber: 100,
-                                        columnNumber: 52
-                                    }, this),
-                                    " ",
-                                    tournament.rules
-                                ]
-                            }, void 0, true, {
-                                fileName: "[project]/src/app/tournaments/page.tsx",
-                                lineNumber: 100,
-                                columnNumber: 29
-                            }, this),
-                            tournament.createdBy && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                className: "text-sm text-gray-500",
-                                children: [
-                                    "Created by: ",
-                                    tournament.createdBy.username
-                                ]
-                            }, void 0, true, {
-                                fileName: "[project]/src/app/tournaments/page.tsx",
-                                lineNumber: 102,
-                                columnNumber: 33
-                            }, this),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                className: "text-sm",
-                                children: [
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("strong", {
-                                        children: "Participants:"
-                                    }, void 0, false, {
-                                        fileName: "[project]/src/app/tournaments/page.tsx",
-                                        lineNumber: 107,
-                                        columnNumber: 33
-                                    }, this),
-                                    " ",
-                                    tournament.participants?.length || 0
-                                ]
-                            }, void 0, true, {
-                                fileName: "[project]/src/app/tournaments/page.tsx",
-                                lineNumber: 106,
-                                columnNumber: 29
-                            }, this),
-                            user && !tournament.participants?.some((p)=>p.userId === user._id) && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                onClick: ()=>handleJoin(tournament._id),
-                                className: "mt-2 px-4 py-2 bg-green-500 text-white rounded",
-                                children: "Join Tournament"
-                            }, void 0, false, {
-                                fileName: "[project]/src/app/tournaments/page.tsx",
-                                lineNumber: 111,
-                                columnNumber: 33
-                            }, this),
-                            user && tournament.participants?.some((p)=>p.userId === user._id) && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                className: "text-green-500 mt-2",
-                                children: "✔ You have joined this tournament"
-                            }, void 0, false, {
-                                fileName: "[project]/src/app/tournaments/page.tsx",
-                                lineNumber: 120,
-                                columnNumber: 33
-                            }, this)
-                        ]
-                    }, tournament._id, true, {
+                            ]
+                        }, tournament._id, true, {
+                            fileName: "[project]/src/app/tournaments/page.tsx",
+                            lineNumber: 107,
+                            columnNumber: 29
+                        }, this)) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                        children: "No tournaments available."
+                    }, void 0, false, {
                         fileName: "[project]/src/app/tournaments/page.tsx",
-                        lineNumber: 85,
+                        lineNumber: 154,
                         columnNumber: 25
-                    }, this)) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                    children: "No tournaments available."
+                    }, this)
                 }, void 0, false, {
                     fileName: "[project]/src/app/tournaments/page.tsx",
-                    lineNumber: 125,
-                    columnNumber: 21
+                    lineNumber: 104,
+                    columnNumber: 17
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/app/tournaments/page.tsx",
-                lineNumber: 82,
+                lineNumber: 98,
                 columnNumber: 13
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/app/tournaments/page.tsx",
-        lineNumber: 72,
+        lineNumber: 88,
         columnNumber: 9
     }, this);
 }

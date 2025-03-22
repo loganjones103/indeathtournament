@@ -13,21 +13,19 @@ passport.use(new GoogleStrategy({
 }, async (accessToken, refreshToken, profile, done) => {
     try {
         let user = await User.findOne({ googleId: profile.id });
+        const avatarUrl = profile.photos?.[0]?.value;
 
         if (!user) {
             const baseUsername = profile.displayName || profile.emails[0].value.split("@")[0];
             let username = baseUsername;
-
             let count = 1;
+
             while (await User.findOne({ username })) {
                 username = `${baseUsername}${count}`;
                 count++;
             }
 
-            // ✅ Download avatar image from Google
-            const avatarUrl = profile.photos?.[0]?.value;
             let avatarFilename = "";
-
             if (avatarUrl) {
                 const ext = path.extname(new URL(avatarUrl).pathname).split("?")[0] || ".jpg";
                 avatarFilename = `${profile.id}_${Date.now()}${ext}`;
@@ -43,7 +41,6 @@ passport.use(new GoogleStrategy({
                 });
             }
 
-            // ✅ Create new user
             user = await User.create({
                 googleId: profile.id,
                 username,
@@ -51,6 +48,28 @@ passport.use(new GoogleStrategy({
                 avatar: avatarFilename ? `/uploads/${avatarFilename}` : "",
                 roles: ["player"]
             });
+        } else {
+            // ✅ Re-download avatar if file is missing
+            if (user.avatar && avatarUrl) {
+                const avatarPath = path.join(__dirname, user.avatar);
+                if (!fs.existsSync(avatarPath)) {
+                    const ext = path.extname(new URL(avatarUrl).pathname).split("?")[0] || ".jpg";
+                    const avatarFilename = `${profile.id}_${Date.now()}${ext}`;
+                    const newAvatarPath = path.join(__dirname, "uploads", avatarFilename);
+
+                    const response = await axios.get(avatarUrl, { responseType: "stream" });
+                    const writer = fs.createWriteStream(newAvatarPath);
+                    response.data.pipe(writer);
+
+                    await new Promise((resolve, reject) => {
+                        writer.on("finish", resolve);
+                        writer.on("error", reject);
+                    });
+
+                    user.avatar = `/uploads/${avatarFilename}`;
+                    await user.save();
+                }
+            }
         }
 
         done(null, user);
@@ -68,7 +87,7 @@ passport.serializeUser((user, done) => {
 passport.deserializeUser(async (id, done) => {
     try {
         console.log("🔍 Finding User by ID:", id);
-        const user = await User.findById(id).select("username email avatar roles"); // 🔥 Use roles instead of role
+        const user = await User.findById(id).select("username email avatar roles");
         if (!user) return done(null, false);
         console.log("✅ User Found:", user);
         done(null, user);
