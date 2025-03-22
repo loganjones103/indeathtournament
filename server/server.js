@@ -37,7 +37,7 @@ app.use((req, res, next) => {
 
 // ✅ Handle preflight requests
 app.options("*", cors({
-    origin: "http://localhost:3000",
+    origin: ["http://localhost:3000", "https://IDUTournament.com"],
     credentials: true,
 }));
 
@@ -51,7 +51,7 @@ app.use(session({
     saveUninitialized: false,
     store: MongoStore.create({ mongoUrl: process.env.MONGO_URI }),
     cookie: {
-        secure: false,
+        secure: process.env.NODE_ENV === "production",
         httpOnly: true,
         maxAge: 24 * 60 * 60 * 1000,
     }
@@ -78,15 +78,7 @@ app.get("/", (req, res) => {
 });
 
 // ✅ Connect DB
-mongoose.connect(process.env.MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-})
-    .then(() => console.log("✅ MongoDB Connected Successfully!"))
-    .catch(err => {
-        console.error("❌ MongoDB Connection Error:", err);
-        process.exit(1);
-    });
+mongoose.connect(process.env.MONGO_URI);
 
 // ✅ Start server
 const PORT = process.env.PORT || 5000;
