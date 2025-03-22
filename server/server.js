@@ -20,26 +20,28 @@ const app = express();
 // ✅ Serve static uploads
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
-// ✅ CORS - clean and correct
+const allowedOrigins = [
+    "http://localhost:3000",
+    "https://in-death-tournament.vercel.app", // Vercel default domain
+    "https://IDUTournament.com",             // Custom domain (adjust if needed)
+];
+
 app.use(cors({
-    origin: "http://localhost:3000",
+    origin: (origin, callback) => {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error("Not allowed by CORS"));
+        }
+    },
     credentials: true,
 }));
 
-// ✅ Ensure CORS headers are set for every response
-app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "http://localhost:3000");
-    res.header("Access-Control-Allow-Credentials", "true");
-    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-});
-
-// ✅ Handle preflight requests
 app.options("*", cors({
-    origin: ["http://localhost:3000", "https://IDUTournament.com"],
+    origin: allowedOrigins,
     credentials: true,
 }));
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
