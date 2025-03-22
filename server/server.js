@@ -22,8 +22,9 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 const allowedOrigins = [
     "http://localhost:3000",
-    "https://in-death-tournament.vercel.app", // Vercel default domain
-    "https://IDUTournament.com",             // Custom domain (adjust if needed)
+    "https://in-death-tournament.vercel.app",
+    "https://idutournament.com",
+    "https://www.idutournament.com",
 ];
 
 app.use(cors({
