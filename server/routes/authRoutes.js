@@ -8,12 +8,13 @@ const router = express.Router();
 // ✅ Google OAuth Login
 router.get("/google", passport.authenticate("google", { scope: ["profile", "email"] }));
 
-// ✅ Google OAuth Callback
+const CLIENT_URL = process.env.CLIENT_URL || "http://localhost:3000";
+
 router.get(
     "/google/callback",
     passport.authenticate("google", { failureRedirect: "/login" }),
     (req, res) => {
-        res.redirect("http://localhost:3000?loggedIn=true"); // ✅ Triggers re-fetch
+        res.redirect(`${CLIENT_URL}?loggedIn=true`);
     }
 );
 
