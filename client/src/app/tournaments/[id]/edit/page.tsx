@@ -26,7 +26,7 @@ export default function EditTournament() {
     useEffect(() => {
         if (!id) return;
 
-        axios.get(`http://localhost:5000/api/tournaments/${id}`)
+        axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/tournaments/${id}`)
             .then(res => {
                 setTournament(res.data);
                 setFormData({
@@ -42,19 +42,21 @@ export default function EditTournament() {
             .catch(() => setError("Tournament not found"))
             .finally(() => setLoading(false));
 
-        axios.get("http://localhost:5000/auth/user", { withCredentials: true })
+        axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/user`, { withCredentials: true })
             .then(res => setUser(res.data))
             .catch(() => setUser(null));
     }, [id]);
 
-    const handleChange = (e: any) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    const handleSubmit = async (e: any) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
-            await axios.put(`http://localhost:5000/api/tournaments/${id}`, formData, { withCredentials: true });
+            await axios.put(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/tournaments/${id}`, formData, {
+                withCredentials: true
+            });
             alert("Tournament updated successfully!");
             router.push(`/tournaments/${id}`);
         } catch (err) {

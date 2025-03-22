@@ -27,7 +27,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     useEffect(() => {
         const fetchUser = async () => {
             try {
-                const res = await axios.get("http://localhost:5000/auth/user", { withCredentials: true });
+                const res = await axios.get(
+                    `${process.env.NEXT_PUBLIC_API_URL}/auth/user`,
+                    { withCredentials: true }
+                );
                 setUser(res.data);
             } catch (error) {
                 setUser(null);

@@ -19,14 +19,14 @@ export default function UserDropdown() {
 
     useEffect(() => {
         axios
-            .get("http://localhost:5000/auth/user", { withCredentials: true })
+            .get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/user`, { withCredentials: true })
             .then((res) => setUser(res.data))
             .catch(() => setUser(null));
     }, []);
 
     const handleLogout = async () => {
         try {
-            await axios.get("http://localhost:5000/auth/logout", { withCredentials: true });
+            await axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/logout`, { withCredentials: true });
             setUser(null);
             window.location.reload();
         } catch (error) {
@@ -35,7 +35,7 @@ export default function UserDropdown() {
     };
 
     const handleLogin = () => {
-        window.location.href = "http://localhost:5000/auth/google";
+        window.location.href = `${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/google`;
     };
 
     useEffect(() => {
@@ -57,7 +57,7 @@ export default function UserDropdown() {
                     className="focus:outline-none"
                 >
                     <img
-                        src={user.avatar.startsWith("http") ? user.avatar : `http://localhost:5000${user.avatar}`}
+                        src={user.avatar.startsWith("http") ? user.avatar : `${process.env.NEXT_PUBLIC_API_BASE_URL}${user.avatar}`}
                         alt="User Avatar"
                         className="w-10 h-10 rounded-full cursor-pointer"
                     />

@@ -13,13 +13,11 @@ export default function ScoreSubmission({ tournamentId, userId, onScoreSubmit }:
     const [score, setScore] = useState("");
     const [image, setImage] = useState<File | null>(null);
     const [message, setMessage] = useState("");
-    
-    // ✅ Ref for the file input
     const fileInputRef = useRef<HTMLInputElement>(null);
 
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files.length > 0) {
-            setImage(e.target.files[0]); 
+            setImage(e.target.files[0]);
         }
     };
 
@@ -36,21 +34,21 @@ export default function ScoreSubmission({ tournamentId, userId, onScoreSubmit }:
 
         try {
             const res = await axios.post(
-                `http://localhost:5000/api/tournaments/${tournamentId}/submit-score`, 
-                formData, 
-                { withCredentials: true, headers: { "Content-Type": "multipart/form-data" } }
+                `${process.env.NEXT_PUBLIC_API_BASE_URL}/api/tournaments/${tournamentId}/submit-score`,
+                formData,
+                {
+                    withCredentials: true,
+                    headers: {
+                        "Content-Type": "multipart/form-data"
+                    }
+                }
             );
 
             setMessage(res.data.message);
-            setScore("");  
+            setScore("");
             setImage(null);
-
-            // ✅ Reset file input field
-            if (fileInputRef.current) {
-                fileInputRef.current.value = "";
-            }
-
-            onScoreSubmit(); 
+            if (fileInputRef.current) fileInputRef.current.value = "";
+            onScoreSubmit();
         } catch (err: any) {
             setMessage(err.response?.data?.message || "Error submitting score.");
         }
@@ -60,20 +58,20 @@ export default function ScoreSubmission({ tournamentId, userId, onScoreSubmit }:
         <div className="mt-4 p-4 max-w-2xl border rounded shadow blue-border">
             <h3 className="text-lg font-bold">Submit Your Score</h3>
             <form onSubmit={handleSubmit} encType="multipart/form-data">
-                <input 
-                    type="number" 
-                    value={score} 
-                    onChange={(e) => setScore(e.target.value)} 
+                <input
+                    type="number"
+                    value={score}
+                    onChange={(e) => setScore(e.target.value)}
                     placeholder="Your Score"
                     className="border p-2 rounded w-full mt-2"
                     required
                 />
-                <input 
-                    type="file" 
-                    accept="image/*" 
-                    onChange={handleFileChange} 
+                <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleFileChange}
                     className="border p-2 rounded w-full mt-2"
-                    ref={fileInputRef} // ✅ Set ref to file input
+                    ref={fileInputRef}
                     required
                 />
                 <button type="submit" className="mt-2 px-4 py-2 bg-blue-500 text-white rounded">

@@ -44,15 +44,17 @@ export default function TournamentDetails() {
         }
     };
 
+    const API = process.env.NEXT_PUBLIC_API_BASE_URL;
+
     useEffect(() => {
         if (!id) return;
 
-        axios.get(`http://localhost:5000/api/tournaments/${id}`)
+        axios.get(`${API}/api/tournaments/${id}`)
             .then(res => setTournament(res.data))
             .catch(() => setError("Tournament not found"))
             .finally(() => setLoading(false));
 
-        axios.get("http://localhost:5000/auth/user", { withCredentials: true })
+        axios.get(`${API}/auth/user`, { withCredentials: true })
             .then(res => setUser(res.data))
             .catch(() => setUser(null));
     }, [id]);
@@ -61,7 +63,7 @@ export default function TournamentDetails() {
         if (!confirm("Are you sure you want to delete this tournament?")) return;
 
         try {
-            await axios.delete(`http://localhost:5000/api/tournaments/${id}`, { withCredentials: true });
+            await axios.delete(`${API}/api/tournaments/${id}`, { withCredentials: true });
             alert("Tournament deleted!");
             router.push("/tournaments");
         } catch (err) {
@@ -70,7 +72,7 @@ export default function TournamentDetails() {
     };
 
     const fetchTournament = () => {
-        axios.get(`http://localhost:5000/api/tournaments/${id}`)
+        axios.get(`${API}/api/tournaments/${id}`)
             .then(res => setTournament(res.data))
             .catch(() => setError("Tournament not found"));
     };
@@ -156,10 +158,10 @@ export default function TournamentDetails() {
                                 <td className="p-2">
                                     {player.proof ? (
                                         <img
-                                            src={`http://localhost:5000${player.proof}`}
+                                            src={`${API}${player.proof}`}
                                             alt="Proof"
                                             className="w-20 h-20 rounded center-img cursor-pointer hover:opacity-80"
-                                            onClick={() => setModalImage(`http://localhost:5000${player.proof}`)}
+                                            onClick={() => setModalImage(`${API}${player.proof}`)}
                                         />
                                     ) : (
                                         "No Proof"

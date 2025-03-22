@@ -24,6 +24,8 @@ export default function TournamentList() {
     const [error, setError] = useState("");
     const [user, setUser] = useState<{ _id: string; username: string } | null>(null);
 
+    const API = process.env.NEXT_PUBLIC_API_BASE_URL;
+
     const listVariants = {
         hidden: { opacity: 0 },
         show: {
@@ -40,12 +42,12 @@ export default function TournamentList() {
     };
 
     useEffect(() => {
-        axios.get("http://localhost:5000/api/tournaments")
+        axios.get(`${API}/api/tournaments`)
             .then(res => setTournaments(res.data))
             .catch(() => setError("Failed to load tournaments"))
             .finally(() => setLoading(false));
 
-        axios.get("http://localhost:5000/auth/user", { withCredentials: true })
+        axios.get(`${API}/auth/user`, { withCredentials: true })
             .then(res => setUser(res.data))
             .catch(() => setUser(null));
     }, []);
@@ -58,7 +60,7 @@ export default function TournamentList() {
 
         try {
             const res = await axios.post(
-                `http://localhost:5000/api/tournaments/${tournamentId}/join`,
+                `${API}/api/tournaments/${tournamentId}/join`,
                 {},
                 { withCredentials: true }
             );

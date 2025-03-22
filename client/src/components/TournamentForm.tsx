@@ -1,5 +1,3 @@
-// ✅ Updated TournamentForm.tsx
-
 "use client";
 
 import { useState, useEffect, useRef } from "react";
@@ -21,9 +19,9 @@ export default function TournamentForm() {
         weaponType: "Any",
         rules: ""
     });
+
     const [message, setMessage] = useState("");
     const router = useRouter();
-
     const startDateRef = useRef<HTMLInputElement>(null);
     const endDateRef = useRef<HTMLInputElement>(null);
 
@@ -34,7 +32,10 @@ export default function TournamentForm() {
                 allowInput: true,
                 onChange: (selectedDates) => {
                     if (selectedDates.length > 0) {
-                        setFormData((prev) => ({ ...prev, startDate: selectedDates[0].toISOString().split("T")[0] }));
+                        setFormData(prev => ({
+                            ...prev,
+                            startDate: selectedDates[0].toISOString().split("T")[0]
+                        }));
                     }
                 },
             });
@@ -46,7 +47,10 @@ export default function TournamentForm() {
                 allowInput: true,
                 onChange: (selectedDates) => {
                     if (selectedDates.length > 0) {
-                        setFormData((prev) => ({ ...prev, endDate: selectedDates[0].toISOString().split("T")[0] }));
+                        setFormData(prev => ({
+                            ...prev,
+                            endDate: selectedDates[0].toISOString().split("T")[0]
+                        }));
                     }
                 },
             });
@@ -62,7 +66,7 @@ export default function TournamentForm() {
         setMessage("");
 
         try {
-            await axios.post("http://localhost:5000/api/tournaments", formData, {
+            await axios.post(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/tournaments`, formData, {
                 withCredentials: true,
                 headers: { "Content-Type": "application/json" }
             });
@@ -84,7 +88,10 @@ export default function TournamentForm() {
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-[#0d1017]">
-            <form onSubmit={handleSubmit} className="w-full max-w-lg p-8 bg-[#161b22] shadow-lg rounded-lg border border-gray-700 create-form">
+            <form
+                onSubmit={handleSubmit}
+                className="w-full max-w-lg p-8 bg-[#161b22] shadow-lg rounded-lg border border-gray-700 create-form"
+            >
                 <h2 className="text-3xl font-bold text-white text-center mb-6">Create a Tournament</h2>
 
                 <InputField label="Tournament Name" name="name" value={formData.name} onChange={handleChange} />
@@ -122,7 +129,10 @@ export default function TournamentForm() {
 
                 <TextAreaField label="Rules" name="rules" value={formData.rules} onChange={handleChange} />
 
-                <button type="submit" className="w-full mt-4 py-2 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-600 transition">
+                <button
+                    type="submit"
+                    className="w-full mt-4 py-2 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-600 transition"
+                >
                     Create Tournament
                 </button>
 

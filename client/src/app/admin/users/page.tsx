@@ -14,9 +14,11 @@ export default function ManageUsers() {
     const [users, setUsers] = useState<User[]>([]);
     const [message, setMessage] = useState("");
 
+    const API = process.env.NEXT_PUBLIC_API_BASE_URL;
+
     useEffect(() => {
         axios
-            .get("http://localhost:5000/api/users", { withCredentials: true })
+            .get(`${API}/api/users`, { withCredentials: true })
             .then(res => setUsers(res.data))
             .catch(() => setMessage("Failed to load users"));
     }, []);
@@ -38,7 +40,7 @@ export default function ManageUsers() {
         const updatedUser = updatedUsers.find(user => user._id === userId);
         try {
             await axios.put(
-                `http://localhost:5000/api/users/${userId}/roles`,
+                `${API}/api/users/${userId}/roles`,
                 { roles: updatedUser?.roles || [] },
                 { withCredentials: true }
             );
