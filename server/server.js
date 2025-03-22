@@ -22,13 +22,13 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 const allowedOrigins = [
     "http://localhost:3000",
-    "https://in-death-tournament.vercel.app",
+    "https://indeathtournament.vercel.app",
     "https://idutournament.com",
     "https://www.idutournament.com",
 ];
 
-app.use(cors({
-    origin: (origin, callback) => {
+const corsOptions = {
+    origin: function (origin, callback) {
         if (!origin || allowedOrigins.includes(origin)) {
             callback(null, true);
         } else {
@@ -36,13 +36,12 @@ app.use(cors({
         }
     },
     credentials: true,
-}));
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+};
 
-app.options("*", cors({
-    origin: allowedOrigins,
-    credentials: true,
-}));
-
+app.use(cors(corsOptions));
+app.options("*", cors(corsOptions)); // Handles preflight correctly
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -83,8 +82,7 @@ app.get("/", (req, res) => {
 // ✅ Connect DB
 mongoose.connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
-    useUnifiedTopology: true,
-    ssl: true,
+    useUnifiedTopology: true
 });
 
 // ✅ Start server
