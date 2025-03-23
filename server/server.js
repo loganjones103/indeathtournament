@@ -56,6 +56,7 @@ app.use(session({
         secure: true,
         httpOnly: true,
         sameSite: "None",
+        domain: ".idutournament.com",
         maxAge: 24 * 60 * 60 * 1000,
       }         
 }));
