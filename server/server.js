@@ -53,10 +53,9 @@ app.use(session({
     saveUninitialized: false,
     store: MongoStore.create({ mongoUrl: process.env.MONGO_URI }),
     cookie: {
-        secure: true,
-        httpOnly: true,
+        secure: false,
+        httpOnly: false,
         sameSite: "None",
-        domain: ".idutournament.com",
         maxAge: 24 * 60 * 60 * 1000,
       }         
 }));
