@@ -15,11 +15,20 @@ const CLIENT_URL = process.env.CLIENT_URL || "http://localhost:3000";
 router.get(
     "/google/callback",
     passport.authenticate("google", { failureRedirect: "/login", session: true }),
-    (req, res) => {
-        console.log("✅ Google login successful. Redirecting to client.");
-        res.redirect(`${CLIENT_URL}?loggedIn=true`);
+    (req, res, next) => {
+        // 🔥 Manually ensure user is saved in session
+        req.login(req.user, (err) => {
+            if (err) {
+                console.error("Login error:", err);
+                return next(err);
+            }
+
+            console.log("✅ Google login successful. Redirecting to client.");
+            res.redirect(`${CLIENT_URL}?loggedIn=true`);
+        });
     }
 );
+
 
 // ✅ Logout + Clear Cookie
 router.get("/logout", (req, res) => {
