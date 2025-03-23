@@ -25,10 +25,12 @@ const allowedOrigins = [
     "https://indeathtournament.vercel.app",
     "https://idutournament.com",
     "https://www.idutournament.com",
+    "*"
 ];
 
 const corsOptions = {
     origin: function (origin, callback) {
+        console.log(origin);
         if (!origin || allowedOrigins.includes(origin)) {
             callback(null, true);
         } else {
@@ -41,21 +43,21 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-app.options("*", cors(corsOptions)); // Handles preflight correctly
+app.options("*", cors(corsOptions));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// ✅ Sessions (before passport)
 app.use(session({
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
     store: MongoStore.create({ mongoUrl: process.env.MONGO_URI }),
     cookie: {
-        secure: false,
-        httpOnly: false,
+        secure: true,
+        httpOnly: true,
         sameSite: "None",
+        domain: ".idutournament.com",
         maxAge: 24 * 60 * 60 * 1000,
       }         
 }));
