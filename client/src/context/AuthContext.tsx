@@ -28,7 +28,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         const fetchUser = async () => {
             try {
                 const res = await axios.get(
-                    `${process.env.NEXT_PUBLIC_API_URL}/auth/user`,
+                    `${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/user`,
                     { withCredentials: true }
                 );
                 setUser(res.data);
