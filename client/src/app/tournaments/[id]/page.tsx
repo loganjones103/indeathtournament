@@ -72,7 +72,7 @@ export default function TournamentDetails() {
     };
 
     const fetchTournament = () => {
-        axios.get(`${API}/api/tournaments/${id}`)
+        axios.get(`${API}/api/tournaments/${id}`, { withCredentials: true })
             .then(res => setTournament(res.data))
             .catch(() => setError("Tournament not found"));
     };

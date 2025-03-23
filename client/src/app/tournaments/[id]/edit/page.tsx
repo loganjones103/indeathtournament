@@ -26,7 +26,7 @@ export default function EditTournament() {
     useEffect(() => {
         if (!id) return;
 
-        axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/tournaments/${id}`)
+        axios.get(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/tournaments/${id}`, { withCredentials: true })
             .then(res => {
                 setTournament(res.data);
                 setFormData({

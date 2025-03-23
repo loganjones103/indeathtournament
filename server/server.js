@@ -56,9 +56,8 @@ app.use(session({
         secure: true,
         httpOnly: true,
         sameSite: "None",
-        domain: "vercel.app", // or ".vercel.app"
         maxAge: 24 * 60 * 60 * 1000,
-      }      
+      }         
 }));
 
 app.get("/debug/cookies", (req, res) => {
