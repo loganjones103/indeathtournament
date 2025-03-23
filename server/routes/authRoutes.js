@@ -9,21 +9,21 @@ const router = express.Router();
 router.get("/google", passport.authenticate("google", { scope: ["profile", "email"] }));
 
 // ✅ CLIENT_URL for redirects
-const CLIENT_URL = process.env.CLIENT_URL || "http://localhost:3000";
+// const CLIENT_URL = process.env.CLIENT_URL || "http://localhost:3000";
 
 // ✅ Google OAuth Callback
 router.get(
     "/google/callback",
     passport.authenticate("google", { failureRedirect: "/login", session: true }),
-    (req, res, next) => {
-        // 🔥 Manually ensure user is saved in session
-        req.login(req.user, (err) => {
+    (req, res) => {
+        console.log("✅ Google login successful. Saving session and redirecting...");
+
+        req.session.save(err => {
             if (err) {
-                console.error("Login error:", err);
-                return next(err);
+                console.error("❌ Session save error:", err);
+                return res.redirect(`${CLIENT_URL}?loggedIn=false`);
             }
 
-            console.log("✅ Google login successful. Redirecting to client.");
             res.redirect(`${CLIENT_URL}?loggedIn=true`);
         });
     }
